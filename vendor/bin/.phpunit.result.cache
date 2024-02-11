@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests::testgetPendingBetSlip":7,"Tests::testCannotBeCreatedFromInvalidEmail":7,"Tests::testCannotBeCreatedFromInvalidData":7},"times":{"Tests::testgetPendingBetSlip":0.005,"Tests::testCannotBeCreatedFromInvalidEmail":0.01,"Tests::testCannotBeCreatedFromInvalidData":0.016}}

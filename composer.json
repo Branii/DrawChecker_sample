@@ -1,0 +1,11 @@
+{
+    "require": {
+        "bypikod/php-test": "^1.0",
+        "react/react": "^1.4",
+        "react/mysql": "^0.6.0",
+        "monolog/monolog": "^3.5",
+        "react/promise": "^3.1",
+        "tedivm/stash": "^0.18.0",
+        "kicken/gearman-php": "^1.4"
+    }
+}
