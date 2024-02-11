@@ -10,12 +10,15 @@ require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
 //     return $flag == true ? end($result) : $result;
 // }
 
-echo "Inserting test data please wait...";
-$data = (new test_data_small)->loadTestData();
-foreach($data as $json){
-    (new Model)->insertTestBetData($json, 'bt_rapidmark6');
-}
-echo "Done";
+function runner($param){ // number of times to insert data
+    echo "Inserting test data please wait...";
+    $data = (new test_data_small)->loadTestData();
+    for ($i=0; $i < $param; $i++) { 
+        $data = (new test_data_small)->loadTestData();
+        (new Model)->insertTestBetData($data[0], 'bt_rapidmark6');
+    }
+    echo "Test data inserted";
+};runner(500); #NOTE - this is a test function, it will insert 50,000 records into the database
 
 
 

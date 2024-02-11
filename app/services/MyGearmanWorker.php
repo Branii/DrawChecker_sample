@@ -21,7 +21,7 @@ class MyGearmanWorker {
 
     public static function JobExecutionProcess($workload) { // Job execution process
         if ($workload) {
-            $batchSize = 1000; $offset = 0; // batches
+            $batchSize = 100; $offset = 0; // batches
             $betData = json_decode($workload,true);
             list($drawNumber,$betPeriod,$betTable) = array_values($betData);
             while ($TotalBets = (new Model)->getPendingBetSlip($betTable,$betPeriod,$batchSize, $offset)) {

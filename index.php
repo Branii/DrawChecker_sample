@@ -7,10 +7,10 @@ $loop = Factory::create();
 //var_dump(Utils::getdrawfromapi(1, true));
 //getdrawfromapi(String $gameid, Bool $flag = false)
 
-//var_dump(Utils::getdrawfromapi(1, false));
+//var_dump(Utils::getdrawfromapi(25, false));
 // var_dump((new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker('worker2', 'FooData'));
 
-$loop->addPeriodicTimer(1,function (){
+$loop->addPeriodicTimer(25,function (){
     
 
     $currentTime = date('H:i:s');
@@ -33,6 +33,6 @@ $loop->addPeriodicTimer(1,function (){
 
 });
  
-echo "Server server started\n";
+echo "Server started\n";
 //Start the event loop
 $loop->run();
