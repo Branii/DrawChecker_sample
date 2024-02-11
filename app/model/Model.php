@@ -46,4 +46,24 @@ class Model extends Database {
 
     }
 
+    public function insertTestBetData(Array $json, String $betTable) {
+        try {
+            // Construct the SQL query
+            $sql = "INSERT INTO $betTable (game_type, game_group, game_name, game_label, game_id, game_model, user_selection, selection_group, unit_stake, 
+            multiplier, bet_amount, win_bonus, bet_odds, bet_number, bet_status, state, remarks, bet_code, bet_date, bet_period, bet_time, bettype, 
+            stop_if_won, stop_if_lost, num_wins, token, uid, email, mobile, rebate, balance_before, balance_after, draw_number, draw_time, draw_period, new_period, ip_address) VALUES 
+                    (:game_type, :game_group, :game_name, :game_label, :game_id, :game_model, :user_selection, :selection_group, 
+                    :unit_stake, :multiplier, :bet_amount, :win_bonus, :bet_odds, :bet_number, :bet_status, :state, :remarks, 
+                    :bet_code, :bet_date, :bet_period, :bet_time, :bettype, :stop_if_won, :stop_if_lost, :num_wins, :token, :uid, 
+                    :email, :mobile, :rebate, :balance_before, :balance_after, :draw_number, :draw_time, :draw_period, :new_period,
+                     :ip_address)";
+    
+            // Pass the values from the $json array as the second argument to the insert() method
+            (new Helper)->insert($sql, test_data_small::getColumsArray($json));
+            
+        } catch (\Throwable $th) {
+            ExceptionHandler::handleException($th);
+        }
+    }
+
 }
