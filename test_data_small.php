@@ -1,18 +1,24 @@
 <?php 
 class test_data_small{  // this is a test class
 
+ public function modify($min, $max, $count) { // manupulate the data below
+    $numbers = range($min, $max);
+    shuffle($numbers);
+    return array_slice($numbers, 0, $count);
+}
+
   public function loadTestData () : array { // testing only
 
     $data = '[
        {
       "game_type": 18,
-      "game_group": "ExtraNo",
+      "game_group": "All5",
       "game_name": 94,
       "game_label": "game_label 97",
       "game_id": 25,
       "game_model": 40,
-      "user_selection": "extraNumber",
-      "selection_group": "'.serialize([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).'", 
+      "user_selection": "group120",
+      "selection_group": "'.serialize($this->modify(2, 6, 5)).'", 
       "unit_stake": "unit_stake 97",
       "multiplier": "multiplier 97",
       "bet_amount": "bet_amount 97",

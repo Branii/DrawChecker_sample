@@ -15,7 +15,7 @@ function runner($param){ // number of times to insert data
     $data = (new test_data_small)->loadTestData();
     for ($i=0; $i < $param; $i++) { 
         $data = (new test_data_small)->loadTestData();
-        (new Model)->insertTestBetData($data[0], 'bt_rapidmark6');
+        (new Model)->insertTestBetData($data[0], 'bet');
      
     }
     echo "Test data inserted";
