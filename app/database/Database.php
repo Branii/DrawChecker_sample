@@ -1,5 +1,4 @@
 <?php 
-
 class Database {
     private static $pdo;
     public static function openLink(String $databaseName) : PDO | STRING {
@@ -22,4 +21,4 @@ class Database {
     }
 }
 
-//var_dump(Database::openLink('testdb')); // test the database connection
+var_dump(Database::openLink('testdb')); // test the database connection
