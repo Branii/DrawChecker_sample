@@ -4,7 +4,7 @@ class Model extends Database {
     
     public function getPendingBetSlip(String $betTable, String $betperiod, Int $batchSize, Int $offset) : array {
 
-        $sql = "SELECT * FROM $betTable WHERE draw_period = '{$betperiod}' AND bet_status = 'pending' LIMIT $offset, $batchSize";
+        $sql = "SELECT * FROM $betTable WHERE bet_status = 'pending' LIMIT $offset, $batchSize";
         $stmt = Database::openLink('testdb')->prepare($sql);
         $stmt->execute();$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         Database::closeLink();return $result;
@@ -22,10 +22,15 @@ class Model extends Database {
     }
     public function updateBetSlipStatus(String $betTable, String $betId, String $betPeriod, String $drawNumber, String $betStatus) : void { // we can do more with this method
       
+       try {
+
         $drawNumber = json_encode(explode(',',$drawNumber));
-        $sql = "UPDATE $betTable SET bet_status = :bet_status, draw_number = :draw_number WHERE bid = :bid AND bet_period = :bet_period";
-        (new Helper)->update($sql, ['bet_status'=>$betStatus,'draw_number'=>$drawNumber, 'bid'=>$betId, 'bet_period'=>$betPeriod]);
-        //echo "bet status updated";
+        $sql = "UPDATE $betTable SET bet_status = :bet_status, draw_number = :draw_number WHERE bid = :bid AND draw_period = :draw_period";
+        (new Helper)->update($sql, ['bet_status'=>$betStatus,'draw_number'=>$drawNumber, 'bid'=>$betId, 'draw_period'=>$betPeriod]);
+        
+       } catch (\Throwable $th) {
+        Monolog::logException($th);
+       }
         
     }
 

@@ -21,13 +21,19 @@ class MyGearmanWorker {
 
     public static function JobExecutionProcess($workload) { // Job execution process
         if ($workload) {
-            $batchSize = 100; $offset = 0; // batches
+            $batchSize = 1000; $offset = 0; // batches
             $betData = json_decode($workload,true);
             list($drawNumber,$betPeriod,$betTable) = array_values($betData);
             while ($TotalBets = (new Model)->getPendingBetSlip($betTable,$betPeriod,$batchSize, $offset)) {
+             
                 foreach ($TotalBets as $bets) {
-                    // Process and work on eact bet
-                    Utils::processsPendingBet($bets,$betTable, $drawNumber,$betPeriod);
+                   
+                    try {
+                        Utils::processsPendingBet($bets, $betTable, $drawNumber, $betPeriod);
+                    } catch (\Throwable $th) {
+                        Monolog::logException($th); // Log exception
+                    }
+
                 }
                 $offset += $batchSize;
                 echo "Processed $offset records" . PHP_EOL; // Show progress after each iteration

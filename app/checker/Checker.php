@@ -16,7 +16,7 @@ class Checker { // checker class
             'betPeriod'  => $gameDrawInfo['draw_date'], 
             'betTable'   => GameTableMap::getGameTableMap()[$gameID]['bet_table']
           ];
-          //(new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker("worker".$gameID , json_encode($workLoad)); // send to gearman workers
+          (new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker("worker".$gameID , json_encode($workLoad)); // send to gearman workers
         }
 
       } catch (\Throwable $th) {

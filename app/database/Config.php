@@ -2,7 +2,7 @@
 class Config {
     
     private static $user = "root";
-    private static $pass = "";
+    private static $pass = "root";
 
     public static function getUser() {
         return self::$user;

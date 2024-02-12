@@ -47,6 +47,7 @@ class Utils  extends Database{
     }
     public static function processsPendingBet(Array $betSlip, String $betTable, String $drawNumber, String $betperiod) : void {
         try {
+
             $betData = unserialize($betSlip['selection_group']);
             $drawNumber = array_map('intval', explode(",", $drawNumber));
             $GAMEGROUP  = $betSlip['game_group']; // class name
