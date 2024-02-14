@@ -1,6 +1,7 @@
 <?php 
 spl_autoload_register(function ($class){
     $dirs = [
+        'vendor',
         'app/database' , 
         'app/exceptions', 
         'app/utils', 
