@@ -27,6 +27,7 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
+    'Pheanstalk\\' => array($vendorDir . '/pda/pheanstalk/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Kicken\\Gearman\\' => array($vendorDir . '/kicken/gearman-php/src'),
     'Interop\\Queue\\' => array($vendorDir . '/queue-interop/queue-interop/src'),

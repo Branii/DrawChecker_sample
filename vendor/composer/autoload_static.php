@@ -46,6 +46,7 @@ class ComposerStaticInita23a91b755eeae2bf0a55ee230c459de
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
+            'Pheanstalk\\' => 11,
         ),
         'M' => 
         array (
@@ -161,6 +162,10 @@ class ComposerStaticInita23a91b755eeae2bf0a55ee230c459de
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'Pheanstalk\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pda/pheanstalk/src',
         ),
         'Monolog\\' => 
         array (
