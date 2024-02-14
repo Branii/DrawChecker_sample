@@ -20,7 +20,34 @@ function runner($param){ // number of times to insert data
      
     }
     echo "Test data inserted";
-};runner(500); #NOTE - this is a test function, it will insert 50,000 records into the database
+};//runner(500); #NOTE - this is a test function, it will insert 50,000 records into the database
+
+
+// function to check for group 120
+function group120(Array $selection, Array $drawNumber) : bool {
+    
+   if(findDuplicate($drawNumber)){
+    return false;
+   }else{
+
+    sort($drawNumber);
+    sort($selection);
+    return $drawNumber === $selection;
+
+   }
+    
+}
+
+function findDuplicate($array1) : bool {
+    foreach (array_count_values($array1) as $value => $count) {
+        if ($count > 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+var_dump(group120([1,2,3,6,5], [1,2,3,2,5]));
 
 
 

@@ -4,6 +4,10 @@ require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
 use React\EventLoop\Factory;
 $loop = Factory::create();
 
+
+require 'Calculator.php';
+
+var_dump( Calculator::calculate(2,4,'divide')); // I am singing
 //var_dump(Utils::getdrawfromapi(1, true));
 //getdrawfromapi(String $gameid, Bool $flag = false)
 

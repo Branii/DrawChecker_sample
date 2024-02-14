@@ -22,6 +22,4 @@ class GameidMap {
     public static function get5x0(): array {
         return [5,26,28];
     }
-
-
 }

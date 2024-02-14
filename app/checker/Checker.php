@@ -8,7 +8,6 @@ class Checker { // checker class
   public static function Check(Array $gameIDs) { # recieve game ids from gamesIdMap class
 
       try {
-
         foreach ($gameIDs as $gameID) {
           $gameDrawInfo = Utils::getdrawfromapi($gameID);
           $workLoad = [
@@ -18,7 +17,6 @@ class Checker { // checker class
           ];
           (new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker("worker".$gameID , json_encode($workLoad)); // send to gearman workers
         }
-
       } catch (\Throwable $th) {
         ExceptionHandler::handleException($th);
       }
