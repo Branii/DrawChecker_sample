@@ -9,6 +9,7 @@
         "kicken/gearman-php": "^1.4",
         "enqueue/enqueue": "0.10.20",
         "symfony/yaml": "^7.0",
-        "pda/pheanstalk": "^5.0"
+        "pda/pheanstalk": "^5.0", 
+        "davidpersson/beanstalk": "^2.0"
     }
 }

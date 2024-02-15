@@ -43,18 +43,18 @@ class MyGearmanWorker {
     }
 
     public function startWorker($server, $workerName, $executeJob) { // Start a worker for a job on a separate process
-       // $pid = pcntl_fork();
-        // if ($pid == -1) {
-        //     die("Failed to fork process.");
-        // } elseif ($pid) {
-        //     // Parent process
-        //     return;
-        // } else {
-        //     // Child process
-        //     $worker = self::createWorker($server, $workerName, $executeJob);
-        //     $worker->work();
-        //     exit(); // Exit the child process after work is done
-        // }
+        $pid = pcntl_fork();
+        if ($pid == -1) {
+            die("Failed to fork process.");
+        } elseif ($pid) {
+            // Parent process
+            return;
+        } else {
+            // Child process
+            $worker = self::createWorker($server, $workerName, $executeJob);
+            $worker->work();
+            exit(); // Exit the child process after work is done
+        }
     }
 
 }
@@ -66,4 +66,4 @@ foreach (Workers::getWorkers() as [$workerName, $executeJob]) { // Workers::getW
 }
 
 // Wait for all child processes to exit
-//while (pcntl_waitpid(0, $status) != -1);
+while (pcntl_waitpid(0, $status) != -1);

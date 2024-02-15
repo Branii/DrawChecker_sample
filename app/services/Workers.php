@@ -8,5 +8,4 @@
             ['worker25', function ($workload) { MyGearmanWorker::JobExecutionProcess($workload);}]
       ]; 
     }
-
 }

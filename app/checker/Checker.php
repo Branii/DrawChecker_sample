@@ -9,13 +9,15 @@ class Checker { // checker class
 
       try {
         foreach ($gameIDs as $gameID) {
+
           $gameDrawInfo = Utils::getdrawfromapi($gameID);
           $workLoad = [
             'drawNumber' => $gameDrawInfo['draw_number'], 
             'betPeriod'  => $gameDrawInfo['draw_date'], 
             'betTable'   => GameTableMap::getGameTableMap()[$gameID]['bet_table']
           ];
-          (new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker("worker".$gameID , json_encode($workLoad)); // send to gearman workers
+
+          echo (new QueueProducer(Config::getQueueServerAddress()))->addJobToQueue("queue".$gameID, json_encode($workLoad)); // send to beanstalk queue
         }
       } catch (\Throwable $th) {
         ExceptionHandler::handleException($th);

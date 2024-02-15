@@ -5,19 +5,7 @@ use React\EventLoop\Factory;
 $loop = Factory::create();
 
 
-require 'Calculator.php';
-
-var_dump( Calculator::calculate(2,4,'divide')); // I am singing
-//var_dump(Utils::getdrawfromapi(1, true));
-//getdrawfromapi(String $gameid, Bool $flag = false)
-
-//var_dump(Utils::getdrawfromapi(25, false));
-// var_dump((new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker('worker2', 'FooData'));
-
-
-
-$loop->addPeriodicTimer(1,function (){
-    
+$loop->addPeriodicTimer(5,function (){
 
     echo $currentTime = date('H:i:s');
     if(isset(Timer::time1x0()[ $currentTime])){ // run all 1min games

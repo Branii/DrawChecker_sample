@@ -75,6 +75,7 @@ class ComposerStaticInita23a91b755eeae2bf0a55ee230c459de
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'Beanstalk\\' => 10,
         ),
     );
 
@@ -206,6 +207,10 @@ class ComposerStaticInita23a91b755eeae2bf0a55ee230c459de
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
+        ),
+        'Beanstalk\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/davidpersson/beanstalk/src',
         ),
     );
 

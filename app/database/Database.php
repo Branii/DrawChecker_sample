@@ -21,4 +21,4 @@ class Database {
     }
 }
 
-var_dump(Database::openLink('testdb')); // test the database connection
+//var_dump(Database::openLink('testdb')); // test the database connection

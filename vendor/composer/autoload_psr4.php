@@ -38,4 +38,5 @@ return array(
     'Enqueue\\Dsn\\' => array($vendorDir . '/enqueue/dsn'),
     'Enqueue\\' => array($vendorDir . '/enqueue/enqueue'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
+    'Beanstalk\\' => array($vendorDir . '/davidpersson/beanstalk/src'),
 );
