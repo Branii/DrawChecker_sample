@@ -4,26 +4,28 @@ require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
 use Beanstalk\Client;
 
 class QueueConsumer { // queue the game draws
-    private $client;
+    private static $client;
 
     public function __construct(Array $serverAddress){ // create the server
-        $this->client = new Client($serverAddress);
-        $this->client->connect();
+        self::$client = new Client($serverAddress);
+        self::$client->connect();
     }
 
-    public static function QueueExecutionProcess(String $queueName, String $gameId){ // get jobs from queue holder and process them with workers
+    public static function QueueExecutionProcess(String $queueName): never { // get jobs from queue holder and process them with workers
         self::$client->watch($queueName);
+        //echo $queueName;
         while (true){
             $job = self::$client->reserve(); // Block until job is available.
             // Now $job is an array which contains its ID and body:
-            // ['id' => 123, 'body' => '/path/to/cat-image.png']
+            // ['id' => 123, 'body' => 'str_job_data']
             $workLoad = $job['body'];
+            
             if ($workLoad) {  // Processing of the job...
-                (new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker("worker".$gameId , json_encode($workLoad)); 
+                (new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker($queueName , json_encode($workLoad)); 
                 self::$client->delete($job['id']);
             } else {
                 Monolog::logException(new Exception('workLoad is empty.'));
-                self::$client->bury($job['id']);
+                self::$client->bury($job['id'],10);
             }
         }
     }
@@ -33,7 +35,7 @@ class QueueConsumer { // queue the game draws
         return $this->client = null;
     }
 
-    public function startConsumers($server, $queueName, $executeJob) { // Start a new queue for a job on a separate process
+    public function startConsumers($executeJob) { // Start a new queue for a job on a separate process
         $pid = pcntl_fork();
         if ($pid == -1) {
             die("Failed to fork process.");
@@ -42,19 +44,18 @@ class QueueConsumer { // queue the game draws
             return;
         } else {
             // Child process
-            $worker = self::startConsumers($server, $queueName, $executeJob);
-            $worker->work();
-            exit(); // Exit the child process after work is done
+            (new QueueConsumer(Config::getQueueServerAddress()))->QueueExecutionProcess($executeJob);
+            exit(); // Exit the child process after queue is started
         }
     }
 }
 //connect to the Beanstalk Server
-//(new QueueConsumer(Config::getQueueServerAddress()))->getJobFromQueue('queue25');
+//(new QueueConsumer(Config::getQueueServerAddress()))->QueueExecutionProcess('queue25'); Testing for 1 queue
 
-// Start a worker for each job in a separate process
-foreach (QueueHolders::getQueueContainer() as [$queueName, $executeJob]) { // QueueHolders::getQueueContainer() is a static method that returns an array of queues and their queuing method
-    (new QueueConsumer(Config::getQueueServerAddress()))->startConsumers(Config::getQueueServerAddress(), $workerName, $executeJob);
-    echo "Started QueueHolder for $queueName" . PHP_EOL;
+// Start a queue for each job in a separate process
+foreach (QueueHolders::getQueueContainer() as $queueName => $executeJob) { // QueueHolders::getQueueContainer() is a static method that returns an array of queues and their queuing method
+    (new QueueConsumer(Config::getQueueServerAddress()))->startConsumers($executeJob);
+    echo "Started QueueHolder for $executeJob" . PHP_EOL;
 }
 
 // Wait for all child processes to exit

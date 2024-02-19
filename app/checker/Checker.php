@@ -17,7 +17,7 @@ class Checker { // checker class
             'betTable'   => GameTableMap::getGameTableMap()[$gameID]['bet_table']
           ];
 
-          (new QueueProducer(Config::getQueueServerAddress()))->addJobToQueue("queue".$gameID, json_encode($workLoad)); // send to beanstalk queue
+          (new QueueProducer(Config::getQueueServerAddress()))->addJobToQueue("worker".$gameID, json_encode($workLoad)); // send to beanstalk queue
         }
       } catch (\Throwable $th) {
         ExceptionHandler::handleException($th);

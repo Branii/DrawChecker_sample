@@ -5,7 +5,7 @@ use React\EventLoop\Factory;
 $loop = Factory::create();
 
 
-$loop->addPeriodicTimer(5,function (){
+$loop->addPeriodicTimer(1,function (){
 
     echo $currentTime = date('H:i:s');
     if(isset(Timer::time1x0()[ $currentTime])){ // run all 1min games

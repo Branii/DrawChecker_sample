@@ -10,7 +10,8 @@ spl_autoload_register(function ($class){
         'app/checker/',
         'app/games/fiveD/',
         'app/games/mark6/'];
-    foreach ($dirs as $dir) {
+   
+        foreach ($dirs as $dir) {
         $filename = $dir . DIRECTORY_SEPARATOR . $class . '.php';
         if (file_exists($filename)) {
             include $filename;

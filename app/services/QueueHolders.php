@@ -1,11 +1,13 @@
 <?php 
-
+require $_SERVER['DOCUMENT_ROOT']. 'vendor/autoload.php';
+require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
  class QueueHolders {
+
   public static function getQueueContainer() : Array {  // Queues and their respective game data
-    return  [
-          ['queue22', function ($queueName,$gameId) { QueueConsumer::QueueExecutionProcess($queueName,$gameId);}],
-          ['queue23', function ($queueName,$gameId) { QueueConsumer::QueueExecutionProcess($queueName,$gameId);}],
-          ['queue25', function ($queueName,$gameId) { QueueConsumer::QueueExecutionProcess($queueName,$gameId);}]
+      return  [
+        'worker20' => 'worker20',
+        'worker23' => 'worker23',
+        'worker25' => 'worker25'
     ]; 
   }
 
