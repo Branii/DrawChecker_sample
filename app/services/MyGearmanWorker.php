@@ -23,8 +23,6 @@ class MyGearmanWorker {
         if ($workload) {
             $batchSize = 1000; $offset = 0; // batches
             $betData = json_decode($workload,true);
-            var_dump($betData); // Log exception
-            exit;
             list($drawNumber,$betPeriod,$betTable) = array_values($betData);
             while ($TotalBets = (new Model)->getPendingBetSlip($betTable,$betPeriod,$batchSize, $offset)) {
              
@@ -35,7 +33,6 @@ class MyGearmanWorker {
                     } catch (\Throwable $th) {
                         Monolog::logException($th); // Log exception
                     }
-
                 }
                 $offset += $batchSize;
                 echo "Processed $offset records" . PHP_EOL; // Show progress after each iteration
