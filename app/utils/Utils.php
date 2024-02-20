@@ -59,13 +59,13 @@ class Utils  extends Database{
             Monolog::logException($th);
         }
     }
-    public static function fetchDataInBackground($table, $period, $limit, $offset): void {
+    public static function fetchDataInBackground($table, $period, $limit, $offset): array {
         $pid = pcntl_fork();
         if ($pid == -1) exit("Failed to fork process.");
         elseif ($pid) return;
         else {
             try {
-                (new Model())->getPendingBetSlip($table, $period, $limit, $offset);
+               return (new Model())->getPendingBetSlip($table, $period, $limit, $offset);
             } catch (Exception $th) {
                 Monolog::logException($th);
             }
