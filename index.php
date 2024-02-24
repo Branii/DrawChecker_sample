@@ -4,7 +4,8 @@ require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
 use React\EventLoop\Factory;
 $loop = Factory::create();
 
-
+// var_dump(Utils::getdrawfromapi(1,false));
+// exit;
 $loop->addPeriodicTimer(1,function (){
 
     echo $currentTime = date('H:i:s');

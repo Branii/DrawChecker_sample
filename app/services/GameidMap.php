@@ -4,7 +4,7 @@ class GameIdMap {
 
     // 1.0 minute game ids
     public static function get1x0(): array {
-        return [25]; //testing
+        return [1,4]; //testing
         //return [1,3,4,6,7,10,13,25,27];
     }
 

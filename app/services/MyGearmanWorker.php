@@ -21,12 +21,15 @@ class MyGearmanWorker {
 
     public static function JobExecutionProcess($workload) { // Job execution process
         if ($workload) {
-            $betData = json_decode($workload,true);
-            list($drawNumber,$betPeriod,$betTable) = array_values($betData);
-
+            $betData = json_decode(json_decode($workload,true),true);
+            extract($betData);
             try {
-                $TotalBets = Utils::fetchDataInBackground($betTable,$betPeriod);
-                Utils::processsPendingBet($TotalBets, $betTable, $drawNumber, $betPeriod);
+                $TotalBets = (new Model)->getPendingBetSlip($betTable,$betPeriod);
+                if(empty($TotalBets)){
+                    echo "No bet data";
+                    return "No bet data";
+                }
+               echo Utils::processsPendingBet($TotalBets, $betTable, $drawNumber, $betPeriod);
             } catch (\Throwable $th) {
                 Monolog::logException($th); // Log exception
             }

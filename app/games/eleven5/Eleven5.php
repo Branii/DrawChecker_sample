@@ -1,6 +1,10 @@
 <?php 
 
-class Eleven5 {
+class Eleven5 extends GamePlayFunction {
+
+   public static function getGamePlayMethod () : Array {
+     return parent::getGamePlayFunction();
+   }
   
     public static function f3straightJoint(Array $selection, Array $drawNumbers) : Bool {
         $winningNumbers = array_slice($drawNumbers, 0, 3);

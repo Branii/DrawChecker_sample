@@ -1,6 +1,6 @@
 <?php
 
- class GamePlayFunction {
+ class GamePlayFunction11x5 {
     public static function getGamePlayFunction() : Array {  // Game Ids and their respective checker function
       return  [
 
