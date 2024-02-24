@@ -59,7 +59,7 @@ class Utils  extends Database{
             Monolog::logException($th);
         }
     }
-    public static function fetchDataInBackground($table, $period, $limit, $offset): array {
+    public static function fetchDataInBackground($table, $period, $limit, $offset): ?array {
         $pid = pcntl_fork();
         if ($pid == -1) exit("Failed to fork process.");
         elseif ($pid) return;
