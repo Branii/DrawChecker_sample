@@ -13,7 +13,7 @@ class QueueConsumer { // queue the game draws
 
     public static function QueueExecutionProcess(String $queueName): never { // get jobs from queue holder and process them with workers
         self::$client->watch($queueName);
-        //echo $queueName;
+        echo $queueName;
         while (true){
             $job = self::$client->reserve(); // Block until job is available.
             // Now $job is an array which contains its ID and body:
@@ -35,7 +35,7 @@ class QueueConsumer { // queue the game draws
         return $this->client = null;
     }
 
-    public function startConsumers($executeJob) { // Start a new queue for a job on a separate process
+    public function startConsumers($queueName) { // Start a new queue for a job on a separate process
         $pid = pcntl_fork();
         if ($pid == -1) {
             die("Failed to fork process.");
@@ -44,7 +44,7 @@ class QueueConsumer { // queue the game draws
             return;
         } else {
             // Child process
-            (new QueueConsumer(Config::getQueueServerAddress()))->QueueExecutionProcess($executeJob);
+            (new QueueConsumer(Config::getQueueServerAddress()))->QueueExecutionProcess($queueName);
             exit(); // Exit the child process after queue is started
         }
     }

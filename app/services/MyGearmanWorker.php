@@ -21,23 +21,30 @@ class MyGearmanWorker {
 
     public static function JobExecutionProcess($workload) { // Job execution process
         if ($workload) {
-            $batchSize = 1000; $offset = 0; // batches
             $betData = json_decode($workload,true);
             list($drawNumber,$betPeriod,$betTable) = array_values($betData);
-            while ($TotalBets = (new Model)->getPendingBetSlip($betTable,$betPeriod,$batchSize, $offset)) {
-             
-                foreach ($TotalBets as $bets) {
-                   
-                    try {
-                        Utils::processsPendingBet($bets, $betTable, $drawNumber, $betPeriod);
-                    } catch (\Throwable $th) {
-                        Monolog::logException($th); // Log exception
-                    }
-                }
-                $offset += $batchSize;
-                echo "Processed $offset records" . PHP_EOL; // Show progress after each iteration
+
+            try {
+                $TotalBets = Utils::fetchDataInBackground($betTable,$betPeriod);
+                Utils::processsPendingBet($TotalBets, $betTable, $drawNumber, $betPeriod);
+            } catch (\Throwable $th) {
+                Monolog::logException($th); // Log exception
             }
+
+            // while ($TotalBets = Utils::fetchDataInBackground($betTable,$betPeriod)) {
+             
+            //     foreach ($TotalBets as $bets) {
+                   
+            //         try {
+            //             Utils::processsPendingBet($bets, $betTable, $drawNumber, $betPeriod);
+            //         } catch (\Throwable $th) {
+            //             Monolog::logException($th); // Log exception
+            //         }
+            //     }
+
+            // }
             #return job status to gearman server here if you want.
+            return "Job done!" . PHP_EOL;
         }
     }
 

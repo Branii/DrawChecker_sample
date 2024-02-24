@@ -1,6 +1,6 @@
 <?php 
 require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
-class BaseClass { 
+class FiveD { 
 
     ###########################################
     # 5D GAMES WIN OR LOST CHECKING FUNCTIONS #
@@ -76,4 +76,4 @@ class BaseClass {
 }
 
 
-var_dump(BaseClass::group12([1,1,2,3],[[1,2],[2,3]],[2,2],4));
+var_dump(FiveD::group12([1,1,2,3],[[1,2],[2,3]],[2,2],4));

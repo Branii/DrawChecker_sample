@@ -15,7 +15,7 @@ class QueueProducer { // queue the game draws
         $this->client->put(
             0, // priority
             0, // delay
-            60, // execution time
+            120, // execution time
             $job // data
         );
         return "Job added to the queue" . $queueName;//

@@ -5,9 +5,12 @@ class Checker { // checker class
   private static $batchSize = 100;
   private static $offset = 0;
 
-  public static function Check(Array $gameIDs) { # recieve game ids from gamesIdMap class
+  public static function Check(Array $gameIDs, String $queueName) { # recieve game ids from gamesIdMap class
 
       try {
+
+        //$queueName = GameTableMap::getDrawQueueName()[$minSent]; // get draw table
+
         foreach ($gameIDs as $gameID) {
 
           $gameDrawInfo = Utils::getdrawfromapi($gameID);
@@ -17,7 +20,7 @@ class Checker { // checker class
             'betTable'   => GameTableMap::getGameTableMap()[$gameID]['bet_table']
           ];
 
-          (new QueueProducer(Config::getQueueServerAddress()))->addJobToQueue("worker".$gameID, json_encode($workLoad)); // send to beanstalk queue
+          echo (new QueueProducer(Config::getQueueServerAddress()))->addJobToQueue($queueName, json_encode($workLoad)); // send to beanstalk queue
         }
       } catch (\Throwable $th) {
         ExceptionHandler::handleException($th);

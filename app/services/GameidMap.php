@@ -1,6 +1,6 @@
 <?php 
 
-class GameidMap {
+class GameIdMap {
 
     // 1.0 minute game ids
     public static function get1x0(): array {
