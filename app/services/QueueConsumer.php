@@ -13,7 +13,6 @@ class QueueConsumer { // queue the game draws
 
     public static function QueueExecutionProcess(String $queueName): never { // get jobs from queue holder and process them with workers
         self::$client->watch($queueName);
-        echo $queueName;
         while (true){
             $job = self::$client->reserve(); // Block until job is available.
             // Now $job is an array which contains its ID and body:
