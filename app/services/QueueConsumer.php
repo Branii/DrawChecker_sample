@@ -54,7 +54,7 @@ class QueueConsumer { // queue the game draws
 // Start a queue for each job in a separate process
 foreach (QueueHolders::getQueueContainer() as $queueName) { // QueueHolders::getQueueContainer() is a static method that returns an array of queues and their queuing method
     (new QueueConsumer(Config::getQueueServerAddress()))->startConsumers($queueName);
-    //echo "Started QueueHolder for $queueName" . "\n";
+    echo "Started QueueHolder for $queueName" . "\n";
 }
 //echo "QueueContainers Started ...";
 // Wait for all child processes to exit
