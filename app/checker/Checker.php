@@ -2,15 +2,10 @@
 ini_set('memory_limit', '256M');
 class Checker { // checker class
 
-  private static $batchSize = 100;
-  private static $offset = 0;
-
   public static function Check(Array $gameIDs, String $queueName) { # recieve game ids from gamesIdMap class
 
       try {
-
-        //$queueName = GameTableMap::getDrawQueueName()[$minSent]; // get draw table
-
+        
         foreach ($gameIDs as $gameID) {
 
           $gameDrawInfo = Utils::getdrawfromapi($gameID);
