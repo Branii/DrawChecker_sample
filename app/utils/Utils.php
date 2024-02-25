@@ -51,7 +51,7 @@ class Utils  extends Database{
 
                  $betData = unserialize($betSlip['selection_group']);
                  $CLASSFILE  = SELF::findGameMethodOrClass(GameClassFile::getGameClassFile(),$betSlip['game_type']); // class name
-                 $CLASSMETHOD  = $CLASSFILE::getGamePlayMethod()[$betSlip['game_id']]; // class name
+                 $CLASSMETHOD  = $CLASSFILE::getGamePlayMethod()[$betSlip['game_id']]; // method name
                  $result = $CLASSFILE::$CLASSMETHOD(SELF::DRAWNUMBER($DRAWNUMBER),$betData) ? '1' : '2'; 
                  (new Model)->updateBetSlipStatus($betTable, $betSlip['bid'], $betperiod, $DRAWNUMBER, $result);
 

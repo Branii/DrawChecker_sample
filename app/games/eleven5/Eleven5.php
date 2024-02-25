@@ -1,6 +1,6 @@
 <?php 
 
-class Eleven5 extends GamePlayFunction {
+class Eleven5 extends GamePlayFunction11x5 {
 
    public static function getGamePlayMethod () : Array {
      return parent::getGamePlayFunction();
