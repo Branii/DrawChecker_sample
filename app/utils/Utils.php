@@ -45,7 +45,7 @@ class Utils  extends Database{
         $clsoingTime = $current_drawtime;
         return $clsoingTime;
     }
-    public static function processsPendingBet(Array $betData, String $betTable, String $DRAWNUMBER, String $betperiod) : String {
+    public static function processsPendingBet(Array $betData, String $betTable, String $DRAWNUMBER, String $betperiod) : String { // process pending bet
         foreach ($betData as $betSlip) {
             try {
 
@@ -57,7 +57,6 @@ class Utils  extends Database{
 
             } catch (\Throwable $th) {
                 ExceptionHandler::handleException($th);
-                Monolog::logException($th);
             }
         }
         return "Processing done.";

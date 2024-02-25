@@ -96,17 +96,6 @@ class GameTableMap {
         }';
         
         return json_decode($json, true);
-        
-    }
-
-    public static function getDrawQueueName(): Array { // get draw table
-        $QueueNames = [
-            "1x0" => "worker1x0",
-            "1x5" => "worker1x5",
-            "3x0" => "worker3x0",
-            "5x0" => "worker5x0"
-        ];
-        return $QueueNames;
     }
 }
 

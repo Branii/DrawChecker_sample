@@ -14,6 +14,7 @@ class ExceptionHandler {
         $fp = fopen('app/exceptions/log.txt', 'a');
         fwrite($fp, Utils::getDate(). ' => ' . json_encode($errorInfo) . PHP_EOL);
         fclose($fp);
+        Monolog::logException($th);
     }
 
 }
