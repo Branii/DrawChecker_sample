@@ -11,12 +11,12 @@
 
         public function selectAll($sql,$params = []) {
             $req = $this->query($sql,$params);
-            return $req->fetchAll(PDO::FETCH_OBJ);
+            return $req->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function selectOne($sql,$params = []) {
             $req = $this->query($sql,$params);
-            return $req->fetch(PDO::FETCH_OBJ);
+            return $req->fetch(PDO::FETCH_ASSOC);
         }
 
         public function insert($sql,$params = []) {

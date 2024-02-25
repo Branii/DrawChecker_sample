@@ -13,7 +13,4 @@ class MyGearmanClient {
         $job = $this->client->submitBackgroundJob($workerName, $workload);
         echo "Job submitted!" . $job;
     }
-
-    
-
 }

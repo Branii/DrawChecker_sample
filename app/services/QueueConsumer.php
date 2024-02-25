@@ -20,7 +20,7 @@ class QueueConsumer { // queue the game draws
             $workLoad = $job['body'];
             
             if ($workLoad) {  // Processing of the job...
-                (new MyGearmanClient('127.0.0.1:4730'))->submitJobToWorker($queueName , json_encode($workLoad)); 
+                (new MyGearmanClient(Config::getGearManServerAddr()))->submitJobToWorker($queueName , json_encode($workLoad)); 
                 self::$client->delete($job['id']);
             } else {
                 Monolog::logException(new Exception('workLoad is empty.'));

@@ -13,12 +13,12 @@ class GameIdMap {
         return [9,11,14,17];
     }
 
-    // 3 minute game ids
+    // 3.0 minute game ids
     public static function get3x0(): array {
         return [8,12,15,16,23];
     }
 
-    // 5 minute game ids
+    // 5.0 minute game ids
     public static function get5x0(): array {
         return [5,26,28];
     }
