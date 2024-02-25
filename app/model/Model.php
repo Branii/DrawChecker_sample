@@ -29,7 +29,6 @@ class Model extends Database {
         ]);
         echo "draw numbers inserted";
     }
-
     public function updateBetSlipStatus(String $betTable, String $betId, String $betPeriod, String $drawNumber, String $betStatus) : void { // we can do more with this method
       
        try {

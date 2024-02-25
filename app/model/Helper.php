@@ -23,7 +23,7 @@
             $req = $this->query($sql,$params);
             return parent::openLink("testdb")->lastInsertId();
         }
-
+        
         public function update($sql,$params = []) {
             $req = $this->query($sql,$params);
             return $req->rowCount();

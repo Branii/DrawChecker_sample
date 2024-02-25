@@ -49,10 +49,10 @@ class Utils  extends Database{
         foreach ($betData as $betSlip) {
             try {
 
-                 $betData = unserialize($betSlip['selection_group']);
-                 $CLASSFILE  = SELF::findGameMethodOrClass(GameClassFile::getGameClassFile(),$betSlip['game_type']); // class name
+                 $SELECTION = unserialize($betSlip['selection_group']);
+                 $CLASSFILE  = SELF::findGameClass(GameClassFile::getGameClassFile(),$betSlip['game_type']); // class name
                  $CLASSMETHOD  = $CLASSFILE::getGamePlayMethod()[$betSlip['game_id']]; // method name
-                 $result = $CLASSFILE::$CLASSMETHOD(SELF::DRAWNUMBER($DRAWNUMBER),$betData) ? '1' : '2'; 
+                 $result = $CLASSFILE::$CLASSMETHOD($SELECTION,SELF::DRAWNUMBER($DRAWNUMBER)) ? '1' : '2'; 
                  (new Model)->updateBetSlipStatus($betTable, $betSlip['bid'], $betperiod, $DRAWNUMBER, $result);
 
             } catch (\Throwable $th) {
@@ -77,15 +77,15 @@ class Utils  extends Database{
              }
         }
     }
-    public static function findGameMethodOrClass(Array $methodOrClassIdGroups, string $methodOrClassId): ?string {
-        foreach ($methodOrClassIdGroups as $group => $value) {
-            if (in_array($methodOrClassId, explode(",", $group))) {
+    public static function findGameClass(Array $ClassIdGroups, string $ClassId): ?string {
+        foreach ($ClassIdGroups as $group => $value) {
+            if (in_array($ClassId, explode(",", $group))) {
                 return $value;
             }
         }
         return null; // Return null if no matching group is found
     }
-    public static function DRAWNUMBER (String $DRAWNUMBER) : array { // format drawnumber for checking
+    public static function DRAWNUMBER(String $DRAWNUMBER) : array { // format drawnumber for checking
         return array_map('intval', str_split($DRAWNUMBER, 2));
     }
 }
