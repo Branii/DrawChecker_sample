@@ -77,7 +77,7 @@ class Utils  extends Database{
              }
         }
     }
-    public static function findGameMethodOrClass(array $methodOrClassIdGroups, string $methodOrClassId): ?string {
+    public static function findGameMethodOrClass(Array $methodOrClassIdGroups, string $methodOrClassId): ?string {
         foreach ($methodOrClassIdGroups as $group => $value) {
             if (in_array($methodOrClassId, explode(",", $group))) {
                 return $value;
@@ -85,7 +85,6 @@ class Utils  extends Database{
         }
         return null; // Return null if no matching group is found
     }
-
     public static function DRAWNUMBER (String $DRAWNUMBER) : array { // format drawnumber for checking
         return array_map('intval', str_split($DRAWNUMBER, 2));
     }
