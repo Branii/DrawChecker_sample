@@ -70,7 +70,7 @@ class MyGearmanWorker {
 
 // Start a worker for each job in a separate process
 foreach (Workers::getWorkers() as [$workerName, $executeJob]) { // Workers::getWorkers() is a static method that returns an array of workers and their executeJob method
-    (new MyGearmanWorker('127.0.0.1:4730'))->startWorker('127.0.0.1:4730', $workerName, $executeJob);
+    (new MyGearmanWorker(Config::getGearManServerAddr()))->startWorker(Config::getGearManServerAddr(), $workerName, $executeJob);
     echo "Started worker for $workerName" . PHP_EOL;
 }
 
