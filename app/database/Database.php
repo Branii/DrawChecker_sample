@@ -12,8 +12,8 @@ class Database {
             return self::$pdo;
         } catch (PDOException $th) {
             Monolog :: logException($th);
+            return $th->getMessage();
         }
-        return "Database connection failed";
     }
 
     public static function closeLink() {
