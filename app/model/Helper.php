@@ -21,7 +21,8 @@
 
         public function insert($sql,$params = []) {
             $req = $this->query($sql,$params);
-            return parent::openLink("testdb")->lastInsertId();
+            return $req;
+            //return parent::openLink("testdb")->lastInsertId();
         }
         
         public function update($sql,$params = []) {

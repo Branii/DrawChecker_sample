@@ -19,8 +19,9 @@ class Checker { // checker class
         }
       } catch (\Throwable $th) {
         ExceptionHandler::handleException($th);
+        Monolog::logException($th);
       }
+      
   }
-
 }
 

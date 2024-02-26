@@ -27,16 +27,22 @@ class Utils  extends Database{
         $dataGotten = json_decode(json_encode($result), true);
         return $flag == true ? end($dataGotten): $dataGotten; 
     }
-    public static function pushDrawnumbers() : void {
-        foreach (GameidMap::get1x0() as $gameid) {
-            if(isset(GameTableMap::getGameTableMap()[$gameid])){
-                $drawtable = GameTableMap::getGameTableMap()[$gameid]['draw_table'];
-                $gameinfo = self::getdrawfromapi($gameid,false);
-                (new Model)->ifExist($drawtable,$gameinfo,$gameid) ? '' : 
-                (new Model)->insetDrawNumbers($drawtable,$gameinfo,$gameid);
+    public static function pushDrawnumbers(Array $gameIds) : String {
+        foreach ($gameIds as $gameid) {
+            try {
+                
+                if(isset(GameTableMap::getGameTableMap()[$gameid])){
+                    $drawtable = GameTableMap::getGameTableMap()[$gameid]['draw_table'];
+                    $gameinfo = self::getdrawfromapi($gameid,false);
+                    (new Model)->ifExist($drawtable,$gameinfo,$gameid) ? '' : 
+                    (new Model)->insetDrawNumbers($drawtable,$gameinfo,$gameid);
+                }
+
+            } catch (\Throwable $th) {
+                Monolog::logException($th);
             }
         }        
-        //echo "draw number inserted";
+        return "done";
     }
     public static function getclosingtime($current_drawtime, $nextdrawseconds, $closingTimeSeconds) : string { // questionable
         // $current_drawtime= strtotime("-$nextdrawseconds seconds", strtotime($current_drawtime));
