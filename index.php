@@ -11,7 +11,8 @@ $loop->addPeriodicTimer(1,function (){
     echo $currentTime = date('H:i:s');
     if(isset(Timer::time1x0()[$currentTime])){ // run all 1min games
         $res = Utils::pushDrawnumbers(GameIdMap::get1x0());
-        $res == 'done' ? Checker::Check(GameIdMap::get1x0(),"worker1x0") : ''; // store all 1min games into queue
+        $res === 'done' ? Checker::Check(GameIdMap::get1x0(),"worker1x0") : exit();
+        //Monolog::logException((new Exception("Could not insert drawnumber")));
     }
 
     // if(isset(Timer::time1x5()[ $currentTime])){ // run all 1.5min games

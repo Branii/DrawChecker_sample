@@ -1,9 +1,4 @@
 <?php
-// require '../database/Database.php';
-// require '../services/GameidMap.php';
-// require '../services/GameTableMap.php';
-// require '../model/Model.php';
-// require '../model/Helper.php';
 
 class Utils  extends Database{
     public static function findPattern(Array $pattern, Array $drawNumbers, Int $index, Int $slice) : bool {  // find patterns in drawsNumbers
@@ -56,8 +51,8 @@ class Utils  extends Database{
             try {
 
                  $SELECTION = unserialize($betSlip['selection_group']);
-                 $CLASSFILE  = SELF::findGameClass(GameClassFile::getGameClassFile(),$betSlip['game_type']); // class name
-                 $CLASSMETHOD  = $CLASSFILE::getGamePlayMethod()[$betSlip['game_id']]; // method name
+                 $CLASSFILE = SELF::findGameClass(GameClassFile::getGameClassFile(),$betSlip['game_type']); // class name
+                 $CLASSMETHOD = $CLASSFILE::getGamePlayMethod()[$betSlip['game_id']]; // method name
                  $result = $CLASSFILE::$CLASSMETHOD($SELECTION,SELF::DRAWNUMBER($DRAWNUMBER)) ? '1' : '2'; 
                  (new Model)->updateBetSlipStatus($betTable, $betSlip['bid'], $betperiod, $DRAWNUMBER, $result);
 
@@ -94,4 +89,5 @@ class Utils  extends Database{
         return array_map('intval', str_split($DRAWNUMBER, 2));
     }
 }
+
 
