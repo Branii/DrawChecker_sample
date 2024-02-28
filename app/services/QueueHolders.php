@@ -5,9 +5,10 @@ require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
 
   public static function getQueueContainer() : Array {  // Queues and their respective game data
     return  [
-        'worker20' => 'worker20',
-        'worker23' => 'worker23',
-        'worker25' => 'worker25'
+        'worker1x0',
+        'worker1x5',
+        'worker3x0',
+        'worker5x0',
     ]; 
   }
 

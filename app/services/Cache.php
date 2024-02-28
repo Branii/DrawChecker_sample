@@ -1,7 +1,7 @@
 <?php 
  require $_SERVER['DOCUMENT_ROOT']. 'vendor/autoload.php';
  use Stash\Pool;
- class Cache {
+ class Cache { // cache the game draws
     private static $pool;
     //save to cache
     public static function push(String $key, Array $data) : STRING {
@@ -17,5 +17,4 @@
         return json_decode($item->get(),true);
     }
     
-
  }

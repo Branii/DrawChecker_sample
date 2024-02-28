@@ -4,6 +4,8 @@ class Config {
     private static $pass = 'root';
     private static $QueueServerAddress = ['host' => '127.0.0.1', 'port' => '11300'];
 
+    private static $GearManServerAddr = '127.0.0.1:4730';
+
     public static function getUser() {
         return self::$user;
     }
@@ -18,6 +20,10 @@ class Config {
 
     public static function getQueueServerAddress() {
         return self::$QueueServerAddress;
+    }
+
+    public static function getGearManServerAddr() {
+        return self::$GearManServerAddr;
     }
     
 }

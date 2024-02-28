@@ -21,23 +21,33 @@ class MyGearmanWorker {
 
     public static function JobExecutionProcess($workload) { // Job execution process
         if ($workload) {
-            $batchSize = 1000; $offset = 0; // batches
-            $betData = json_decode($workload,true);
-            list($drawNumber,$betPeriod,$betTable) = array_values($betData);
-            while ($TotalBets = (new Model)->getPendingBetSlip($betTable,$betPeriod,$batchSize, $offset)) {
-             
-                foreach ($TotalBets as $bets) {
-                   
-                    try {
-                        Utils::processsPendingBet($bets, $betTable, $drawNumber, $betPeriod);
-                    } catch (\Throwable $th) {
-                        Monolog::logException($th); // Log exception
-                    }
+            $betData = json_decode(json_decode($workload,true),true);
+            extract($betData);
+            try {
+                $TotalBets = (new Model)->getPendingBetSlip($betTable,$betPeriod);
+                if(empty($TotalBets)){
+                    echo "No bet data";
+                    return "No bet data";
                 }
-                $offset += $batchSize;
-                echo "Processed $offset records" . PHP_EOL; // Show progress after each iteration
+               echo Utils::processsPendingBet($TotalBets, $betTable, $drawNumber, $betPeriod);
+            } catch (\Throwable $th) {
+                Monolog::logException($th); // Log exception
             }
+
+            // while ($TotalBets = Utils::fetchDataInBackground($betTable,$betPeriod)) {
+             
+            //     foreach ($TotalBets as $bets) {
+                   
+            //         try {
+            //             Utils::processsPendingBet($bets, $betTable, $drawNumber, $betPeriod);
+            //         } catch (\Throwable $th) {
+            //             Monolog::logException($th); // Log exception
+            //         }
+            //     }
+
+            // }
             #return job status to gearman server here if you want.
+            return "Job done!" . PHP_EOL;
         }
     }
 
@@ -60,7 +70,7 @@ class MyGearmanWorker {
 
 // Start a worker for each job in a separate process
 foreach (Workers::getWorkers() as [$workerName, $executeJob]) { // Workers::getWorkers() is a static method that returns an array of workers and their executeJob method
-    (new MyGearmanWorker('127.0.0.1:4730'))->startWorker('127.0.0.1:4730', $workerName, $executeJob);
+    (new MyGearmanWorker(Config::getGearManServerAddr()))->startWorker(Config::getGearManServerAddr(), $workerName, $executeJob);
     echo "Started worker for $workerName" . PHP_EOL;
 }
 

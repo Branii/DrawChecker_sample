@@ -1387,7 +1387,6 @@ class Timer {
             "23:59:00"=> "1380"
     ];
     }
-
     //  1.5 minutes games
     public static function time1x5(): array{
         return [
@@ -3148,7 +3147,6 @@ class Timer {
             "23:58:30" => "0920",
         ];
     }
-
     // 3.0 minute times
     public static function time3x0():array{
         return [
@@ -3614,7 +3612,6 @@ class Timer {
             "23:57:00" => "0460",
         ];
     }
-
     // 5.0 minute times
     public static function time5x0(): array{
         return  [

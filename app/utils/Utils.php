@@ -1,9 +1,4 @@
 <?php
-// require '../database/Database.php';
-// require '../services/GameidMap.php';
-// require '../services/GameTableMap.php';
-// require '../model/Model.php';
-// require '../model/Helper.php';
 
 class Utils  extends Database{
     public static function findPattern(Array $pattern, Array $drawNumbers, Int $index, Int $slice) : bool {  // find patterns in drawsNumbers
@@ -27,16 +22,22 @@ class Utils  extends Database{
         $dataGotten = json_decode(json_encode($result), true);
         return $flag == true ? end($dataGotten): $dataGotten; 
     }
-    public static function pushDrawnumbers() : void {
-        foreach (GameidMap::get1x0() as $gameid) {
-            if(isset(GameTableMap::getGameTableMap()[$gameid])){
-                $drawtable = GameTableMap::getGameTableMap()[$gameid]['draw_table'];
-                $gameinfo = self::getdrawfromapi($gameid,false);
-                (new Model)->ifExist($drawtable,$gameinfo,$gameid) ? '' : 
-                (new Model)->insetDrawNumbers($drawtable,$gameinfo,$gameid);
+    public static function pushDrawnumbers(Array $gameIds) : String {
+        foreach ($gameIds as $gameid) {
+            try {
+                
+                if(isset(GameTableMap::getGameTableMap()[$gameid])){
+                    $drawtable = GameTableMap::getGameTableMap()[$gameid]['draw_table'];
+                    $gameinfo = self::getdrawfromapi($gameid,false);
+                    (new Model)->ifExist($drawtable,$gameinfo,$gameid) ? '' : 
+                    (new Model)->insetDrawNumbers($drawtable,$gameinfo,$gameid);
+                }
+
+            } catch (\Throwable $th) {
+                Monolog::logException($th);
             }
         }        
-        //echo "draw number inserted";
+        return "done";
     }
     public static function getclosingtime($current_drawtime, $nextdrawseconds, $closingTimeSeconds) : string { // questionable
         // $current_drawtime= strtotime("-$nextdrawseconds seconds", strtotime($current_drawtime));
@@ -45,33 +46,49 @@ class Utils  extends Database{
         $clsoingTime = $current_drawtime;
         return $clsoingTime;
     }
-    public static function processsPendingBet(Array $betSlip, String $betTable, String $drawNumber, String $betperiod) : void {
-        try {
-
-            $betData = unserialize($betSlip['selection_group']);
-            $drawNumber = array_map('intval', explode(",", $drawNumber));
-            $GAMEGROUP  = $betSlip['game_group']; // class name
-            $METHOD  = $betSlip['user_selection']; // method name
-            $result = (new $GAMEGROUP)->$METHOD($drawNumber, $betData) ? 'won' : 'lost'; 
-            (new Model)->updateBetSlipStatus($betTable, $betSlip['bid'], $betperiod, implode(",",$drawNumber), $result);
-        } catch (\Throwable $th) {
-            ExceptionHandler::handleException($th);
-            Monolog::logException($th);
-        }
-    }
-    public static function fetchDataInBackground($table, $period, $limit, $offset): ?array {
-        $pid = pcntl_fork();
-        if ($pid == -1) exit("Failed to fork process.");
-        elseif ($pid) return;
-        else {
+    public static function processsPendingBet(Array $betData, String $betTable, String $DRAWNUMBER, String $betperiod) : String { // process pending bet
+        foreach ($betData as $betSlip) {
             try {
-               return (new Model())->getPendingBetSlip($table, $period, $limit, $offset);
-            } catch (Exception $th) {
+
+                 $SELECTION = unserialize($betSlip['selection_group']);
+                 $CLASSFILE = SELF::findGameClass(GameClassFile::getGameClassFile(),$betSlip['game_type']); // class name
+                 $CLASSMETHOD = $CLASSFILE::getGamePlayMethod()[$betSlip['game_id']]; // method name
+                 $result = $CLASSFILE::$CLASSMETHOD($SELECTION,SELF::DRAWNUMBER($DRAWNUMBER)) ? '1' : '2'; 
+                 (new Model)->updateBetSlipStatus($betTable, $betSlip['bid'], $betperiod, $DRAWNUMBER, $result);
+
+            } catch (\Throwable $th) {
+                ExceptionHandler::handleException($th);
                 Monolog::logException($th);
             }
-            exit();
+        }
+        return "Processing done.";
+    }
+    public static function fetchDataInBackground($table, $period): ?array {
+       $pid = pcntl_fork();
+        if ($pid == -1) {
+            die("Failed to fork process.");
+        } elseif ($pid) {
+            // Parent process
+            // Do nothing
+        } else {
+            try {
+                return (new Model())->getPendingBetSlip($table, $period);
+             } catch (Exception $th) {
+                 Monolog::logException($th);
+             }
         }
     }
-
+    public static function findGameClass(Array $ClassIdGroups, string $ClassId): ?string {
+        foreach ($ClassIdGroups as $group => $value) {
+            if (in_array($ClassId, explode(",", $group))) {
+                return $value;
+            }
+        }
+        return null; // Return null if no matching group is found
+    }
+    public static function DRAWNUMBER(String $DRAWNUMBER) : array { // format drawnumber for checking
+        return array_map('intval', str_split($DRAWNUMBER, 2));
+    }
 }
+
 

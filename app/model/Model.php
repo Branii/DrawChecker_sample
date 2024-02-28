@@ -2,23 +2,32 @@
 
 class Model extends Database {
     
-    public function getPendingBetSlip(String $betTable, String $betperiod, Int $batchSize, Int $offset) : array {
+    public function getPendingBetSlip(String $betTable, String $betperiod) : array {
 
-        $sql = "SELECT * FROM $betTable WHERE bet_status = 'pending' LIMIT $offset, $batchSize";
+        $sql = "SELECT * FROM $betTable WHERE bet_status = '5' AND draw_period = :draw_period";
         $stmt = Database::openLink('testdb')->prepare($sql);
-        $stmt->execute();$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute(['draw_period'=>$betperiod]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         Database::closeLink();return $result;
 
     }
-
-
-    public function insetDrawNumbers(String $drawtable, Array $gameInfo, String $gameid) : void { // we can do more with this method
-
-        $drawNumber = json_encode(explode(',',$gameInfo['draw_number']));
-        $sql = "INSERT INTO $drawtable (draw_number, date_created, raw_date, time_added, draw_status, bet_period, lottery_type, opening_time, closing_time, draw_count) VALUES (:draw_number, :date_created, :raw_date, :time_added, :draw_status, :period, :lottery_type, :opening_time, :closing_time, :draw_count)";
-        (new Helper)->insert($sql, ['draw_number'=>$drawNumber, 'date_created'=>date('Y-m-d H:i:s'), 'raw_date'=>$gameInfo['draw_date'], 'time_added'=>date('H:i:s'), 'draw_status'=>'pending', 'bet_period'=>$gameInfo['draw_date'], 'lottery_type'=>$gameid, 'opening_time'=>$gameInfo['draw_time'], 'closing_time'=>$gameInfo['draw_time'], 'draw_count'=>count(explode(',',$gameInfo['draw_number']))]);
+    public function insetDrawNumbers(string $drawtable, array $gameInfo, string $gameid): void {
+        $drawNumber = json_encode(explode(',', $gameInfo['draw_number']));
+        $sql = "INSERT INTO $drawtable (draw_number, date_created, raw_date, time_added, draw_status, period, lottery_type, opening_time, closing_time, draw_count) 
+                VALUES (:draw_number, :date_created, :raw_date, :time_added, :draw_status, :period, :lottery_type, :opening_time, :closing_time, :draw_count)";
+        (new Helper)->insert($sql, [
+            'draw_number' => $drawNumber,
+            'date_created' => date('Y-m-d H:i:s'),
+            'raw_date' => $gameInfo['draw_date'],
+            'time_added' => date('H:i:s'),
+            'draw_status' => 'pending',
+            'period' => $gameInfo['draw_date'],
+            'lottery_type' => $gameid,
+            'opening_time' => $gameInfo['draw_time'],
+            'closing_time' => $gameInfo['draw_time'],
+            'draw_count' => count(explode(',', $gameInfo['draw_number']))
+        ]);
         echo "draw numbers inserted";
-        
     }
     public function updateBetSlipStatus(String $betTable, String $betId, String $betPeriod, String $drawNumber, String $betStatus) : void { // we can do more with this method
       
@@ -33,15 +42,13 @@ class Model extends Database {
        }
         
     }
-
     public function ifExist(String $drawtable, Array $gameInfo, String $gameid) : bool { // ensure we have a unique draw number, returns boolean
 
         $sql = "SELECT * FROM $drawtable WHERE period = :period";
-        $result = (new Helper)->selectAll($sql, ['period'=>$gameInfo['draw_date']]);
-        return count($result) > 0 ? true : false;
+        $result = (new Helper)->selectOne($sql, ['period'=>$gameInfo['draw_date']]);
+        return $result ? true : false;
 
     }
-
     public function getGameDrawInfo(String $gameid, bool $flag) : stdClass { // get the last draw number for a game, returns object
 
         $sql1 = "SELECT * FROM gamestable_map WHERE game_type = :game_type";
@@ -50,7 +57,6 @@ class Model extends Database {
         return (new Helper)->selectOne($sql2);
 
     }
-
     public function insertTestBetData(Array $json, String $betTable) {
         try {
             // Construct the SQL query

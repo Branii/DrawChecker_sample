@@ -12,7 +12,7 @@ class Database {
             return self::$pdo;
         } catch (PDOException $th) {
             Monolog :: logException($th);
-             return $th->getMessage();
+            return $th->getMessage();
         }
     }
 

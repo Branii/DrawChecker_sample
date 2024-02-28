@@ -96,7 +96,6 @@ class GameTableMap {
         }';
         
         return json_decode($json, true);
-        
     }
 }
 
