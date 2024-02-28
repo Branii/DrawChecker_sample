@@ -58,6 +58,7 @@ class Utils  extends Database{
 
             } catch (\Throwable $th) {
                 ExceptionHandler::handleException($th);
+                Monolog::logException($th);
             }
         }
         return "Processing done.";
