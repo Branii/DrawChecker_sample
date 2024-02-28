@@ -16,6 +16,7 @@
            '413' => 'Mixed',
            '414' => 'OnePairStandardManual',
            '417' => 'OnePairStandardJoint',
+           '418' => 'OnePairGroup', 
            '419' => 'TwoNoGroup', 
            '420' => 'TwoNoStandard',
            '423' => 'GuessANumber'
