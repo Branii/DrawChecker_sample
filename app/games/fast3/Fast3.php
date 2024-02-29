@@ -1,6 +1,10 @@
 <?php 
 
-class Fast3 {
+class Fast3 extends GamePlayFunctionF3{
+
+    public static function getGamePlayMethod () : Array { //////////// THE INVOKE METHOD
+    return parent::getGamePlayFunction();/////////////////////////////////////////////
+    }///////////////////////////////////////////////////////////////////////////////////
 
     public static function Bsoe(Array $selection, Array $drawNumber) : Bool { // must review
         $data = ['1'=>range(11, 18), '2'=>range(3, 10), '3'=> range(1, 9, 2), '4'=> range(0, 8, 2)];
@@ -53,7 +57,7 @@ class Fast3 {
         return in_array(implode(',',$drawNumbers),$selection[0]) && in_array($drawNumber[2],$selection[1]);
     }// fn->[[[1,1],[2,2],[3,3]],[1,2,3]],[1,1,2] = true
 
-    public static function OneGroup(Array $selection, Array $drawNumber) : Bool {
+    public static function OnePairGroup(Array $selection, Array $drawNumber) : Bool {
         foreach ($selection[0] as $value) {
             if (self::findDuplicate(explode(',',$value)) == self::findDuplicate($drawNumber)) return true;
         }return false;
