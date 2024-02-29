@@ -1,5 +1,5 @@
 <?php 
-require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
+
 class FiveD extends GamePlayFunction5D{ 
 
     public static function getGamePlayMethod () : Array { //////////// THE INVOKE METHOD

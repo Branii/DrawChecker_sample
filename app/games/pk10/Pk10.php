@@ -1,6 +1,10 @@
 <?php 
 
-class Pk10{
+class Pk10 extends GamePlayFunctionPk10{
+
+    public static function getGamePlayMethod () : Array { //////////// THE INVOKE METHOD
+        return parent::getGamePlayFunction();///////////////////////////////////////////
+    }///////////////////////////////////////////////////////////////////////////////////
 
     public static function FirstOneStraightJoint(Array $selection, Array $drawNumber) : Bool {
         return in_array($drawNumber[0], $selection);
@@ -72,6 +76,33 @@ class Pk10{
         in_array($winningNumbers[3], $selection[3])) return true; else return false;
     } //-> fn([[1],[2],[],[]],[1,2,3,4,5,6,7,8,9,10]) = true
 
+
+    //Dragon Tiger Function
+    // NOTE - dragontiger function to be implemented by stir
+    //please implement the dragon timer function below
+    
+    public function PickJoint(Array $selection, Array $drawNumber) : Bool {
+        return in_array($drawNumber[0], $selection[0]) || 
+               in_array($drawNumber[1], $selection[1]) || 
+               in_array($drawNumber[2], $selection[2]) ||
+               in_array($drawNumber[3], $selection[3]) ||
+               in_array($drawNumber[4], $selection[4]) ||
+               in_array($drawNumber[5], $selection[5]) ||
+               in_array($drawNumber[6], $selection[6]) ||
+               in_array($drawNumber[7], $selection[7]) ||
+               in_array($drawNumber[8], $selection[8]) ||
+               in_array($drawNumber[9], $selection[9]);
+
+    } //-> fn([[[1],[2],[],[],[],[],[],[],[],[]],[1,2,3,4,5,6,7,8,9,10]) = true
+
+    public function PickManual(Array $selection, Array $drawNumber) : Bool {
+        foreach ($selection[0] as $value) {
+            $splited = explode(',', $value);
+           
+        }return false;
+    } //-> fn([[1,2,3,4,5],[6,7,8,9,10]],[1,2,3,4,5,6,7,8,9,10]) = true
+
+    
 
 
 }
