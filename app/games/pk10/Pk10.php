@@ -182,7 +182,4 @@ class Pk10 extends GamePlayFunctionPk10{
         return in_array($sum, $selection[0]) ? true : false;
     } //-> fn([["01","02","1,2"]],[1,2,3,4,5,6,7,8,9,10]) = true
 
-
 }
-
-var_dump(Pk10::FirstFiveFixedPlace([[5],[3],[],[],[]],[1,2,3,4,5,6,7,8,9,10])); // true
