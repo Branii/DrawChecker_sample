@@ -5,7 +5,7 @@ class GamePlayFunctionHappy8 {
     public static function getGamePlayFunction() : Array {  // Game Ids and their respective checker function
       return  [
 
-        #---------------Pk10 Standard----------------
+        #---------------Happy8 Standard----------------
 
            '462' => 'PickOne',
            '463' => 'PickTwo',
@@ -18,7 +18,7 @@ class GamePlayFunctionHappy8 {
            '472' => 'FunOddEven',
            '473' => 'FunSum'
 
-        #---------------Pk10 2Sides----------------=> waiting for 2side game ids
+        #---------------Happy8 2Sides----------------=> waiting for 2side game ids
 
       ]; 
     }

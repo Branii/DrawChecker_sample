@@ -293,7 +293,6 @@ class Eleven5 extends GamePlayFunction11x5 {
        public static function pick(string $jsonString, Array $drawNumber) {
         $jsonArray = json_decode($jsonString, true);
         $selection = explode(",", $jsonArray['selection']);
-    
         switch ($pick = $jsonArray['pick']) {
             case 'first2group':
                 return count(array_intersect($selection, array_slice($drawNumber, 0, 2))) == 2;
@@ -318,4 +317,6 @@ class Eleven5 extends GamePlayFunction11x5 {
         return in_array($winningNumbers[0],$selection[0]) &&
         in_array($winningNumbers[1],$selection[1]) && in_array($winningNumbers[2],$selection[2]);
        } // fn -> [['02','01'],['03','04'],['05','07']],['01','03','08','04','05'] = true
+
+       //############################# Board Games ###################################//
 }
