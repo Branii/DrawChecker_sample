@@ -108,22 +108,79 @@ class Pk10 extends GamePlayFunctionPk10{
         }return $count >= 2 ? true : false;
     } //-> fn([["01","02","1,2"]],[1,2,3,4,5,6,7,8,9,10]) = true
 
-    public static function pick2Manual(Array $selection, Array $drawNumber) : Bool { // review
-       
+    public static function pick2Manual(Array $selection, Array $drawNumber) : Bool { // needs review
         $rows = $selection[0];
         $selected = $selection[1];
-
+        $count = 0;
         foreach ($rows as $value) {
-            # code...
-        }
+            $ball = $drawNumber[$value - 1];
+            $sell = $selected[$value - 1];
+            in_array($ball, explode(',', $sell)) ? $count++ : null;
+        }return $count >= 2 ? true : false;
+
+    } //-> fn([["1","2"]],[1,2,3,4,5,6,7,8,9,10]) = true
+
+    public static function pick3Joint(Array $selection, Array $drawNumber) : Bool {
+        $count = 0;
         for ($i = 0; $i <= 9; $i++) {
             if (in_array($drawNumber[$i], $selection[$i])) {
                 $count++;
             }
-        }return $count >= 2 ? true : false;
-
+        }return $count >= 3 ? true : false;
     } //-> fn([["01","02","1,2"]],[1,2,3,4,5,6,7,8,9,10]) = true
 
+    public static function pick3Manual(Array $selection, Array $drawNumber) : Bool { // needs review
+        $rows = $selection[0];
+        $selected = $selection[1];
+        $count = 0;
+        foreach ($rows as $value) {
+            $ball = $drawNumber[$value - 1];
+            $sell = $selected[$value - 1];
+            in_array($ball, explode(',', $sell)) ? $count++ : null;
+        }return $count >= 3 ? true : false;
+    } //-> fn([["1","2","3"]],[1,2,3,4,5,6,7,8,9,10]) = true
+
+    public static function BseoFirst5(Array $selection, array $drawNumber)  : Bool  { // review 
+        $winningNumbers = array_slice($drawNumber, 0, 5);
+        $data = [
+            '1' => range(6,10),
+            '2' => range(1,5),
+            '3' => range(1,9,2),
+            '4' => range(0,8,2)
+        ];
+        $count = 0;
+        foreach ($selection as $value) {
+           foreach ($value as $number) {
+               count(array_intersect($data[$number], $winningNumbers)) >= 1 ? $count++ : null;
+           }
+        }
+        return $count >= 1 ? true : false;
+    } //-> fn([["01","02","1,2"]],[1,2,3,4,5,6,7,8,9,10]) = true
+
+    public static function BsoeTopTwo(Array $selection, array $drawNumber) : Bool { // review
+        $sum = array_sum(array_slice($drawNumber, 0, 2));
+        $data = [
+            '1' => range(12,19),
+            '2' => range(3,11),
+            '3' => range(1,9,2),
+            '4' => range(0,8,2)
+        ];
+        $count = 0;
+        foreach ($selection[0] as $value) {
+           if(in_array($sum,$data[$value])) $count++;
+        }
+        return $count >= 1 ? true : false;
+    } //-> fn([["1","2"],[1,2,3,4,5,6,7,8,9,10]) = true
+
+    public static function SumOfTopTwo(Array $selection, array $drawNumber) : Bool { // review
+        $sum = array_sum(array_slice($drawNumber, 0, 2));
+        return in_array($sum, $selection[0]) ? true : false;
+    } //-> fn([["01","02","1,2"]],[1,2,3,4,5,6,7,8,9,10]) = true
+
+    public static function SumOfFirstThree(Array $selection, array $drawNumber) : Bool { // review
+        $sum = array_sum(array_slice($drawNumber, 0, 3));
+        return in_array($sum, $selection[0]) ? true : false;
+    } //-> fn([["01","02","1,2"]],[1,2,3,4,5,6,7,8,9,10]) = true
 
 
 }

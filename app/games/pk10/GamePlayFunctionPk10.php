@@ -18,13 +18,15 @@ class GamePlayFunctionPk10 {
            '366' => 'FirstFiveStraightManual',
            '367' => 'FirstFiveFixedPlace',
            '368' => 'LastFiveFixedPlace', 
-           '484' => 'pickJoint2x2',
-           '486' => 'pickJoint3x3',
-           '488' => 'pickJoint4x4',
-           '490' => 'pickJoint5x5',
-           '492' => 'pickJoint5x6',
-           '494' => 'pickJoint5x7',
-           '496' => 'pickJoint5x8',
+           '369' => 'DragonTiger',
+           '370' => 'pick2Joint',
+           '371' => 'pick2Manual',
+           '372' => 'pick3Joint',
+           '373' => 'pick3Manual',
+           '374' => 'BseoFirst5',
+           '375' => 'BsoeTopTwo',
+           '376' => 'SumOfTopTwo',
+           '378' => 'SumOfFirstThree'
 
         #---------------11x5 2Sides----------------=> waiting for 2side game ids
 
