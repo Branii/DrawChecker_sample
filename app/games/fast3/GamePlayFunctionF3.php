@@ -21,7 +21,7 @@
            '420' => 'TwoNoStandard',
            '423' => 'GuessANumber'
 
-        #---------------Fast 2Sides----------------=> waiting for 2side game ids
+        #---------------Fast3 2Sides----------------=> waiting for 2side game ids
 
       ]; 
     }
