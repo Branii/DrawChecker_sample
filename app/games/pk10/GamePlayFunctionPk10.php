@@ -28,7 +28,7 @@ class GamePlayFunctionPk10 {
            '376' => 'SumOfTopTwo',
            '378' => 'SumOfFirstThree'
 
-        #---------------11x5 2Sides----------------=> waiting for 2side game ids
+        #---------------PK10 2Sides----------------=> waiting for 2side game ids
 
       ]; 
     }
