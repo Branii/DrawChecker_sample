@@ -2,6 +2,10 @@
 
 class Happy8 extends GamePlayFunctionHappy8 { 
 
+    public static function getGamePlayMethod () : Array { //////////// THE INVOKE METHOD
+        return parent::getGamePlayFunction();///////////////////////////////////////////
+    }///////////////////////////////////////////////////////////////////////////////////
+
     public static function PickOne(Array $selection, Array $drawNumber) : Bool {
         $newArray = array_merge($selection[0], $selection[1]);
         return count(array_intersect($drawNumber, $newArray)) >= 1;
