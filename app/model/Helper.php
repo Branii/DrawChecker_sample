@@ -1,5 +1,5 @@
 <?php 
-// require $_SERVER['DOCUMENT_ROOT']. 'includer.php';
+
     class Helper extends Database {
         
         public function query($sql,$params = []) {

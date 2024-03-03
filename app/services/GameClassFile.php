@@ -1,7 +1,7 @@
 <?php 
 
 class GameClassFile {
-    public static function getGameClassFile() : Array {  // Game class file
+    public static function getGameClassFile() : Array {  // Game class files
       return [
            '1,4,5,6,7,8,9' => 'FiveD',
            '3,17,23'       => 'Pk10',

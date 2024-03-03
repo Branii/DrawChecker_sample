@@ -1,5 +1,4 @@
 <?php 
-
 class GamePlayFunctionHappy8 {
 
     public static function getGamePlayFunction() : Array {  // Game Ids and their respective checker function
