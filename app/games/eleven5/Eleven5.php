@@ -319,4 +319,31 @@ class Eleven5 extends GamePlayFunction11x5 {
        } // fn -> [['02','01'],['03','04'],['05','07']],['01','03','08','04','05'] = true
 
        //############################# Board Games ###################################//
+    
+         function UpperAndLowerPlate (Array $selection, Array $drawNumber) { // 
+           $data = [
+           'offering' => count(array_intersect(['07','08','09','10','11'],$drawNumber)) > count(array_intersect(['01','02','03','04','05'],$drawNumber)) ? true : false,
+           'lower plate' => count(array_intersect(['01','02','03','04','05'],$drawNumber)) > count(array_intersect(['07','08','09','10','11'],$drawNumber)) ? true : false,
+           'Tie' => count(array_intersect(['01','02','03','04','05'],$drawNumber)) == count(array_intersect(['07','08','09','10','11'],$drawNumber)) ? true : false
+           ];return $data[$selection[0]];
+         }
+         
+         function GuessTheNumberSum(Array $selection, Array $drawNumber) {
+           return array_sum($drawNumber) == $selection[0];
+         }
+         
+         function GuessTheNumberMiddle(Array $selection, Array $drawNumbe) {
+           sort($drawNumbe);
+           return $drawNumbe[2] == $selection[0];
+         }
+         
+         function OddandEvenDisk(Array $selection, Array $drawNumbe) {
+           $data = [
+             'Single plate'=> count(array_intersect(['01','03','05','07','09','11'],drawNumber)) > count(array_intersect(['02','04','06','08','10'],drawNumber)) ? true : false,
+             'double lotus' => count(array_intersect(['01','03','05','07','09','11'],drawNumber)) < count(array_intersect(['02','04','06','08','10'],drawNumber)) ? true : false
+           ];return $data[$selection];
+         }
+
+     //############################# Dragon And Tiger ###################################//
+    
 }
