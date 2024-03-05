@@ -1,0 +1,24 @@
+<?php
+
+ 11X5(GAMES)
+ -------------------------------
+ offering, lower plate, tie => 1
+ single plate, double lotus => 2
+ guess the middle => 3
+ odd and evern disck => 4
+
+ PK_10(GAMES)
+-------------------------------
+farward,back => 1
+01->10       => 2
+champ, runner up, third place, fourth place, fifth place => 3
+sixth place, seventh place, eighth place, ninth place, tenth place => 4
+quick , slow => 5
+
+HAPPPY 8(GAMES IDs)
+--------------------------------
+big,and,small => 1
+superior,middle,down => 2
+strage,tie,odd => 3
+one,pair,bigodd,smallodd,bigeven,smalleven => 4
+gold,wood,water,fire,earth => 5
