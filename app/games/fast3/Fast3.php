@@ -88,7 +88,123 @@ class Fast3 extends GamePlayFunctionF3{
         }return false;
     }
 
+    ####################### fast 3 board games ############################
 
+    public static function  SumNumbers(Array $selection, Array $drawNumber):Bool{
+   
+        $numberGroups = [
+            'Big'   => [11, 12,13,14,15,16,17], 
+            'Small' => [4, 5, 6,7,8,9,10],
+            'Odd'   => [5,7,9,11,13,15] ,
+            'Even'  => [4,6,8,10,12,14,16],
+        ];
+    
+        foreach ($selection[0] as $betSelect) {
+            if (in_array(array_sum($drawNumber), $numberGroups[$betSelect])) {
+                return 1;
+            }
+        }
+         return 0;
+      
+    }// fn(["Big"],[1,2,3,4,5,6,2]) = true
+    
+    
+    public static function  SumDice(Array $selection, Array $drawNumber):Bool{
+        $sum = array_sum($drawNumber);
+        return  (in_array($sum,$selection[0])) ? "1" :"0" ;
+           
+    }// fn(["Big"],[1,2,3,4,5,6,2]) = true
+        
+    
+    public static function  TwoDice(Array $selection, Array $drawNumber) : Bool {
+        sort($drawNumber);  
+        $Text = implode('', $drawNumber);
+        $data = [
+            'Six Six' => strstr($Text,'66') ? true : false,
+            'Five Five' => strstr($Text,'55') ? true : false,
+            'Four Four' => strstr($Text,'44') ? true : false,
+            'Three Three' => strstr($Text,'33') ? true : false,
+            'Two Two' => strstr($Text,'22') ? true : false,
+            'One One' => strstr($Text,'11') ? true : false,
+           
+        ];
+        return $data[$selection[0]]; 
+          
+
+    }// fn(["Big"],[1,2,3,4,5,6,2]) = true
+    
+    
+    public static function  ThreeDice(Array $selection, Array $drawNumber): Bool {
+        sort($drawNumber);  
+        $Text = implode('', $drawNumber);
+        $data = [
+            'Six Six Six' => strstr($Text,'666') ? true : false,
+            'Five Five Five' =>  strstr($Text,'555') ? true : false,
+            'Four Four Four' => strstr($Text,'444') ? true : false,
+            'Three Three Three' =>  strstr($Text,'333') ? true : false,
+            'Two Two Two' => strstr($Text,'222') ? true : false,
+            'One One One' => strstr($Text,'111') ? true : false,
+        ];
+        
+        return $data[$selection[0]];
+      
+    }// fn(["Big"],[1,2,3,4,5,6,2]) = true
+    
+    
+    public static function  ComboDice(Array $selection, Array $drawNumber) :  Bool{
+      
+        $gameData = [
+            '666',
+            '555',
+            '444',
+            '333',
+            '222',
+            '111',
+          ];
+    
+           sort($drawNumber); 
+           $draw = implode("",$drawNumber);  
+           foreach ($gameData as $betSelect) {
+             if(strstr($draw,$betSelect) !== false) return true; else return false; 
+           }
+    }// fn(["Big"],[1,2,3,4,5,6,2]) = true
+    
+    
+    public static function  AnyTwoDice(Array $selection, Array $drawNumber):Bool{
+        sort($drawNumber);  
+        $Text = implode('', $drawNumber);
+        $data = [
+            'Five Six' => strstr($Text,'56') ? true : false,
+            'Four Six' => strstr($Text,'46') ? true : false,  
+            'Four Five' => strstr($Text,'45') ? true : false,   
+            'Three Six' => strstr($Text,'36') ? true : false, 
+            'Three Five' =>  strstr($Text,'35') ? true : false,
+            'Three Four' =>  strstr($Text,'34') ? true : false,
+            'Two Six' =>  strstr($Text,'26') ? true : false,  
+            'Two Five' => strstr($Text,'25') ? true : false,
+            'Two Four' =>  strstr($Text,'24') ? true : false,
+            'Two Three' => strstr($Text,'23') ? true : false,
+            'One Six' => strstr($Text,'16') ? true : false,   
+            'One Five' => strstr($Text,'15') ? true : false,
+            'One Four' => strstr($Text,'14') ? true : false,
+            'One Three' =>  strstr($Text,'13') ? true : false,
+            'One Two' => strstr($Text,'12') ? true : false,  
+        ];
+        return $data[$selection[0]];
+    }// fn(["Big"],[1,2,3,4,5,6,2]) = true
+    
+    
+    public static function  FullDice(Array $selection, Array $drawNumber): Bool{ // 
+        $data = [
+            'Six' => in_array(6, $drawNumber) ? 1 : 0,
+            'Five' =>  in_array(5, $drawNumber) ? 1 : 0,
+            'Four' =>  in_array(4, $drawNumber) ? 1 : 0,
+            'Three' =>  in_array(3, $drawNumber) ? 1 : 0,
+            'Two' =>  in_array(2, $drawNumber) ? 1 : 0,
+            'One' =>  in_array(1, $drawNumber) ? 1 : 0
+        ];
+        return $data[$selection[0]];
+    }
 }
 
 // waiting for twoside,board,roadbet
