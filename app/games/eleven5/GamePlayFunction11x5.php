@@ -44,6 +44,9 @@
 
         #---------------11x5 2Sides----------------=> waiting for 2side game ids
 
+        #---------------11x5 BoardGame----------------=> waiting for 2side game ids
+
+
       ]; 
     }
  }
