@@ -339,8 +339,8 @@ class Eleven5 extends GamePlayFunction11x5 {
          
          function OddandEvenDisk(Array $selection, Array $drawNumbe) {
            $data = [
-             'Single plate'=> count(array_intersect(['01','03','05','07','09','11'],drawNumber)) > count(array_intersect(['02','04','06','08','10'],drawNumber)) ? true : false,
-             'double lotus' => count(array_intersect(['01','03','05','07','09','11'],drawNumber)) < count(array_intersect(['02','04','06','08','10'],drawNumber)) ? true : false
+             'Single plate'=> count(array_intersect(['01','03','05','07','09','11'],$drawNumber)) > count(array_intersect(['02','04','06','08','10'],$drawNumber)) ? true : false,
+             'double lotus' => count(array_intersect(['01','03','05','07','09','11'],$drawNumber)) < count(array_intersect(['02','04','06','08','10'],$drawNumber)) ? true : false
            ];return $data[$selection];
          }
 
