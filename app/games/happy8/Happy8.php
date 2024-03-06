@@ -43,16 +43,50 @@ class Happy8 extends GamePlayFunctionHappy8 {
 
 
     // happy 8 fun ------------------------------
-    public static function FunOverUnder(Array $selection, Array $drawNumber) : Bool {
-      return false;
-    } 
-
-    public static function FunOddEven(Array $selection, Array $drawNumber) : Bool {
-      return false;
+     function FunOverUnder(Array $selection, Array $drawNumber) {
+      $superNum = array_filter($drawNumber, function($num) {
+            return is_numeric($num) && intval($num) >= 1 && intval($num) <= 40;
+      });$duperNum = array_diff($drawNumber, $superNum);
+      $data = [
+          'Over' => count($superNum) > count($duperNum) ? true : false,
+          'Tie'   => count($superNum) == count($duperNum) ? true : false,
+          'Under'    => count($duperNum) > count($superNum) ? true : false,
+      ];
+      $select = explode(',', $selection[0]);
+      foreach ($select as $value) {
+          if ($data[$value] == true) return true; else return false;
+      }
     }
 
-    public static function FunSum(Array $selection, Array $drawNumber) : Bool {
-      return false;
+    public static function FunOddEven(Array $selection, Array $drawNumber) {
+      $data = [
+          'Odd'   => count(array_filter($drawNumber, fn($num) => $num % 2 != 0)) > count(array_filter($drawNumber, fn($num) => $num % 2 == 0)) ? true : false,
+          'Tie'   => count(array_filter($drawNumber, fn($num) => $num % 2 != 0)) == count(array_filter($drawNumber, fn($num) => $num % 2 == 0)) ? true : false,
+          'Even' => count(array_filter($drawNumber, fn($num) => $num % 2 == 0)) > count(array_filter($drawNumber, fn($num) => $num % 2 != 0)) ? true : false
+        ];
+        $select = explode(',', $selection[0]);
+        foreach ($select as $value) {
+            if ($data[$value] == true) return true; else return false;
+        }
+    }
+    
+
+    public static function FunSum(Array $selection, Array $drawNumber) {
+      $data = [
+       
+        'Big' => array_sum($drawNumber) > 810  ? true : false,
+        'Odd' => array_sum($drawNumber) % 2 != 0  ? true : false,
+        'Even' => array_sum($drawNumber) % 2 == 0  ? true : false,
+        'Small' => array_sum($drawNumber) < 810  ? true : false
+      ];
+        $count = 0;
+        foreach ($selection as $value) {
+        if ($data[$value] == true){
+          $count++;
+        }
+
+        return $count > 0 ? $count : 0;
+    }
     }
 
 
