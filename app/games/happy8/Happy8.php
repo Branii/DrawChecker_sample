@@ -147,6 +147,26 @@ class Happy8 extends GamePlayFunctionHappy8 {
           
       }
 
+    ##############################v Happy 8 BOARD GAMES #################################
+
+      public static function SumBigSmallOddEven(Array $selection, Array $drawNumber) : Mixed {
+     $superNum = array_filter($drawNumber, function($num) {
+          return is_numeric($num) && intval($num) >= 1 && intval($num) <= 40;
+     });
+     $duperNum = array_diff($drawNumber, $superNum);
+        $data = [
+         'Big' =>   array_sum($drawNumber) > 810 ? true : false,
+         'Small' => array_sum($drawNumber) < 810 ? true : false,
+         'Even' =>  array_sum($drawNumber) % 2 == 0 ? true : false,
+         'Odd' =>   array_sum($drawNumber) % 2 != 0 ? true : false,
+         'FirstMore' => count($superNum) > count($duperNum) ? true : false,
+         'LastMore' => count($superNum) < count($duperNum) ? true : false,
+         'MoreEven' => count(array_filter($drawNumber, fn($num) => $num % 2 == 0)) > count(array_filter($drawNumber, fn($num) => $num % 2 != 0)),
+         'MoreOdd' => count(array_filter($drawNumber, fn($num) => $num % 2 != 0)) > count(array_filter($drawNumber, fn($num) => $num % 2 == 0)),
+       ];
+     return array_sum($drawNumber) == 810 ? 'Tie' ? $data[$selection[0]];
+  }
+
 
 
 }
