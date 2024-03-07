@@ -208,3 +208,15 @@ class Fast3 extends GamePlayFunctionF3{
 }
 
 // waiting for twoside,board,roadbet
+
+
+
+######################### Fast 3  Board Games ##########################
+
+   public static function SumBigSmall(Array $selection, Array $drawNumber){
+    $data = [
+     'Big' =>  array_sum($drawNumber) >= 11 ? true : false,
+     'Small' =>  array_sum($drawNumber) <= 11 ? true : false
+    ];
+    return in_array(3, array_count_values($drawNumber)) ? false : $data[$selection[0]];
+  }
