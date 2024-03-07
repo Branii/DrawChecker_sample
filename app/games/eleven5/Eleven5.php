@@ -320,5 +320,72 @@ class Eleven5 extends GamePlayFunction11x5 {
 
        //############################# Board Games ###################################//
 
+
+     //############################# ROAD BET 11X5 ###################################//
+
+  public static function SumAllDrawNumber(Array $selection, Array $drawNumber) : Mixed {
+    $data = [
+     'Big' =>   array_sum($drawNumber) > 30 ? true : (array_sum($drawNumber)) == 30 ? 'Tie' : false,
+     'Small' => array_sum($drawNumber) < 30 ? true : (array_sum($drawNumber)) == 30 ? 'Tie' : false,
+     'Even' =>  array_sum($drawNumber) % 2 == 0 ? true : false,
+     'Odd' =>   array_sum($drawNumber) % 2 != 0 ? true : false,
+     'Dragon' => self::DT(0, 4, $drawNumber) == "Dragon" ? true : false,
+     'Tiger' => self::DT(0, 4, $drawNumber) == "Tiger" ? true : false
+   ];return $data[$selection[0]];
+  }
+  
+  
+  public static function FirstBall(Array $selection, Array $drawNumber){
+    $data = [
+     'Big' =>  $drawNumber[0] >= 6 ? true : false,
+     'Small' => $drawNumber[0] <= 6 ? true : false,
+     'Even' => $drawNumber[0] % 2 == 0 ? true : false,
+     'Odd' => $drawNumber[0] % 2 != 0 ? true : false
+    ];return $data[$selection[0]];
+  }
+  
+    public static function SecondBall(Array $selection, Array $drawNumber){
+    $data = [
+     'Big' =>  $drawNumber[0] >= 6 ? true : false,
+     'Small' => $drawNumber[0] <= 6 ? true : false,
+     'Even' => $drawNumber[0] % 2 == 0 ? true : false,
+     'Odd' => $drawNumber[0] % 2 != 0 ? true : false
+    ];return $data[$selection[0]];
+  }
+  
+    public static function ThirdBall(Array $selection, Array $drawNumber){
+    $data = [
+     'Big' =>  $drawNumber[0] >= 6 ? true : false,
+     'Small' => $drawNumber[0] <= 6 ? true : false,
+     'Even' => $drawNumber[0] % 2 == 0 ? true : false,
+     'Odd' => $drawNumber[0] % 2 != 0 ? true : false
+    ];return $data[$selection[0]];
+  }
+  
+    public static function FourthBall(Array $selection, Array $drawNumber){
+    $data = [
+     'Big' =>  $drawNumber[0] >= 6 ? true : false,
+     'Small' => $drawNumber[0] <= 6 ? true : false,
+     'Even' => $drawNumber[0] % 2 == 0 ? true : false,
+     'Odd' => $drawNumber[0] % 2 != 0 ? true : false
+    ];return $data[$selection[0]];
+  }
+  
+    public static function FifthBall(Array $selection, Array $drawNumber){
+    $data = [
+     'Big' =>  $drawNumber[0] >= 6 ? true : false,
+     'Small' => $drawNumber[0] <= 6 ? true : false,
+     'Even' => $drawNumber[0] % 2 == 0 ? true : false,
+     'Odd' => $drawNumber[0] % 2 != 0 ? true : false
+    ];return $data[$selection[0]];
+  }
+
+
+
+
+
+
+    
+
        
 }
