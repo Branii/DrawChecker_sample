@@ -52,7 +52,7 @@
            '3' => 'GuessTheNumberMiddle',
            '4' => 'GuessTheNumberSum',
 
-      #---------------11x5 BoardGame----------------=> 
+      #---------------11x5 Road bet----------------=> 
 
          '1181' => 'SumAllDrawNumber',
          '1182' => 'SumAllDrawNumber',

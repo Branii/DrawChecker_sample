@@ -37,7 +37,7 @@ class GamePlayFunctionPk10 {
             '4' => 'MinimumValue',
             '5' => 'QuickOrSlow',
 
-        #---------------PK10 Bord Games----------------=> 
+        #---------------PK10 Road Bet Games----------------=> 
 
             '1116' => 'SumOfFirstTwo',
             '1117' => 'SumOfFirstTwo',
@@ -73,7 +73,7 @@ class GamePlayFunctionPk10 {
 
             '1136' => 'BigSmallNineBall',
             '1146' => 'BigSmallNineBall',
-            
+
             '1137' => 'BigSmallTenBall',
             '1147' => 'BigSmallTenBall',
 
