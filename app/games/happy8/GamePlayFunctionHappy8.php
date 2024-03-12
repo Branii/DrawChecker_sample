@@ -15,9 +15,24 @@ class GamePlayFunctionHappy8 {
            '468' => 'PickSeven',
            '471' => 'FunOverUnder',
            '472' => 'FunOddEven',
-           '473' => 'FunSum'
+           '473' => 'FunSum',
 
-        #---------------Happy8 2Sides----------------=> waiting for 2side game ids
+        #---------------Happy8 2Sides------------------=> waiting for 2side game ids
+
+        #---------------Happy8 Board Games-------------=> waiting for 2side game ids
+         
+          '1' => 'BigAndSmall',
+          '2' => 'SuperirrMiddelLower',
+          '3' => 'OddTieEven',
+          '4' => 'BOSOBESE',
+          '5' => 'GoldAndOthers',
+
+
+        #---------------Happy8 Road Bet ---------------=> 
+          '1232' => 'SumBigSmallOddEven',
+          '1233' => 'SumBigSmallOddEven',
+          '1234' => 'SumBigSmallOddEven',
+          '1235' => 'SumBigSmallOddEven'
 
       ]; 
     }

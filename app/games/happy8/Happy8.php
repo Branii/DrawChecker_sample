@@ -147,7 +147,7 @@ class Happy8 extends GamePlayFunctionHappy8 {
           
       }
 
-    ##############################v Happy 8 BOARD GAMES #################################
+    ##############################v Happy 8 ROAD BET GAMES #################################
 
       public static function SumBigSmallOddEven(Array $selection, Array $drawNumber) : Mixed {
      $superNum = array_filter($drawNumber, function($num) {
