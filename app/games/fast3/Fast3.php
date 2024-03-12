@@ -205,13 +205,9 @@ class Fast3 extends GamePlayFunctionF3{
         ];
         return $data[$selection[0]];
     }
-}
-
-// waiting for twoside,board,roadbet
 
 
-
-######################### Fast 3  Board Games ##########################
+    ######################### Fast 3  Road Bet Games ##########################
 
    public static function SumBigSmall(Array $selection, Array $drawNumber){
     $data = [
@@ -220,3 +216,12 @@ class Fast3 extends GamePlayFunctionF3{
     ];
     return in_array(3, array_count_values($drawNumber)) ? false : $data[$selection[0]];
   }
+
+
+}
+
+// waiting for twoside,board,roadbet
+
+
+
+
