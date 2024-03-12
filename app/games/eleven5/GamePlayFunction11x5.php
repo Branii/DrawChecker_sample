@@ -44,12 +44,17 @@
 
         #---------------11x5 2Sides----------------=> waiting for 2side game ids
 
+<<<<<<< HEAD
        #---------------11x5 Board Games-------------=> waiting for 2side game ids
            '1' => 'UpperAndLowerPlate',
            '2' => 'OddandEvenDisk',
            '3' => 'GuessTheNumberMiddle',
            '4' => 'GuessTheNumberSum'
             
+=======
+        #---------------11x5 BoardGame----------------=> waiting for 2side game ids
+
+>>>>>>> ff9117e3800249e2248f716721ca30a75227a0b9
 
       ]; 
     }
