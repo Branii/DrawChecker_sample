@@ -318,8 +318,7 @@ class Eleven5 extends GamePlayFunction11x5 {
         in_array($winningNumbers[1],$selection[1]) && in_array($winningNumbers[2],$selection[2]);
        } // fn -> [['02','01'],['03','04'],['05','07']],['01','03','08','04','05'] = true
 
-       //############################# Board Games ###################################//
-<<<<<<< HEAD
+       //############################# Board Games ###################################//<<<<<<< HEAD
     
          function UpperAndLowerPlate (Array $selection, Array $drawNumber) { // 
            $data = [
@@ -346,8 +345,6 @@ class Eleven5 extends GamePlayFunction11x5 {
          }
 
      //############################# Dragon And Tiger ###################################//
-    
-=======
 
 
      //############################# ROAD BET 11X5 ###################################//
@@ -410,12 +407,4 @@ class Eleven5 extends GamePlayFunction11x5 {
   }
 
 
-
-
-
-
-    
-
-       
->>>>>>> ff9117e3800249e2248f716721ca30a75227a0b9
 }

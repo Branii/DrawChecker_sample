@@ -44,17 +44,35 @@
 
         #---------------11x5 2Sides----------------=> waiting for 2side game ids
 
-<<<<<<< HEAD
-       #---------------11x5 Board Games-------------=> waiting for 2side game ids
+
+       #---------------11x5 Board Games-------------=> 
+
            '1' => 'UpperAndLowerPlate',
            '2' => 'OddandEvenDisk',
            '3' => 'GuessTheNumberMiddle',
-           '4' => 'GuessTheNumberSum'
-            
-=======
-        #---------------11x5 BoardGame----------------=> waiting for 2side game ids
+           '4' => 'GuessTheNumberSum',
 
->>>>>>> ff9117e3800249e2248f716721ca30a75227a0b9
+      #---------------11x5 BoardGame----------------=> 
+
+         '1181' => 'SumAllDrawNumber',
+         '1182' => 'SumAllDrawNumber',
+         '1180' => 'SumAllDrawNumber',
+
+         '1170' => 'FirstBall',
+         '1175' => 'FirstBall',
+
+
+         '1171' => 'SecondBall',
+         '1176' => 'SecondBall',
+
+         '1172' => 'ThirdBall',
+         '1177' => 'ThirdBall',
+
+         '1173' => 'FourthBall',
+         '1178' => 'FourthBall',
+
+         '1174' => 'FifthBall',
+         '1179' => 'FifthBall',
 
       ]; 
     }
