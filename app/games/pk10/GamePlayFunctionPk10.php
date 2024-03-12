@@ -39,17 +39,43 @@ class GamePlayFunctionPk10 {
 
         #---------------PK10 Bord Games----------------=> 
 
-            '1116,1117' => 'SumOfFirstTwo',
-            '1128,1138,1118' => 'BigSmallFirstBall',
-            '1129,1139,1119' => 'BigSmallSecondBall',
-            '1130,1140,1120' => 'BigSmallThirdBall',
-            '1131,1141,1121' => 'BigSmallFourthBall',
-            '1132,1142,1122' => 'BigSmallFifthBall',
-            '1133,1143' => 'BigSmallSixBall',
-            '1134,1144' => 'BigSmallSevenBall',
-            '1135,1145' => 'BigSmallEightBall',
-            '1136,1146' => 'BigSmallNineBall',
-            '1137,1147' => 'BigSmallTenBall',
+            '1116' => 'SumOfFirstTwo',
+            '1117' => 'SumOfFirstTwo',
+
+            '1128' => 'BigSmallFirstBall',
+            '1138' => 'BigSmallFirstBall',
+            '1118' => 'BigSmallFirstBall',
+
+            '1129' => 'BigSmallSecondBall',
+            '1139' => 'BigSmallSecondBall',
+            '1119' => 'BigSmallSecondBall',
+
+            '1130' => 'BigSmallThirdBall',
+            '1140' => 'BigSmallThirdBall',
+            '1120' => 'BigSmallThirdBall',
+
+            '1131' => 'BigSmallFourthBall',
+            '1141' => 'BigSmallFourthBall',
+            '1121' => 'BigSmallFourthBall',
+
+            '1132' => 'BigSmallFifthBall',
+            '1142' => 'BigSmallFifthBall',
+            '1122' => 'BigSmallFifthBall',
+
+            '1133' => 'BigSmallSixBall',
+            '1143' => 'BigSmallSixBall',
+
+            '1134' => 'BigSmallSevenBall',
+            '1144' => 'BigSmallSevenBall',
+
+            '1135' => 'BigSmallEightBall',
+            '1145' => 'BigSmallEightBall',
+
+            '1136' => 'BigSmallNineBall',
+            '1146' => 'BigSmallNineBall',
+            
+            '1137' => 'BigSmallTenBall',
+            '1147' => 'BigSmallTenBall',
 
       ]; 
     }
