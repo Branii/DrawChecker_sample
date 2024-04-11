@@ -16,6 +16,7 @@ class Checker { // checker class
           ];
 
           echo (new QueueProducer(Config::getQueueServerAddress()))->addJobToQueue($queueName, json_encode($workLoad)); // send to beanstalk queue
+         
         }
       } catch (\Throwable $th) {
         ExceptionHandler::handleException($th);
