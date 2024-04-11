@@ -13,20 +13,20 @@ class QueueConsumer { // queue the game draws
 
     public static function QueueExecutionProcess(String $queueName): never { // get jobs from queue holder and process them with workers
         self::$client->watch($queueName);
-        while (true){
-            $job = self::$client->reserve(); // Block until job is available.
-            // Now $job is an array which contains its ID and body:
-            // ['id' => 123, 'body' => 'str_job_data']
-            $workLoad = $job['body'];
-            
-            if ($workLoad) {  // Processing of the job...
-                (new MyGearmanClient(Config::getGearManServerAddr()))->submitJobToWorker($queueName , json_encode($workLoad)); 
-                self::$client->delete($job['id']);
-            } else {
-                Monolog::logException(new Exception('workLoad is empty.'));
-                self::$client->bury($job['id'],10);
-            }
+ 
+        $job = self::$client->reserve(); // Block until job is available.
+        // Now $job is an array which contains its ID and body:
+        // ['id' => 123, 'body' => 'str_job_data']
+        $workLoad = $job['body'];
+        
+        if ($workLoad) {  // Processing of the job...
+            (new MyGearmanClient(Config::getGearManServerAddr()))->submitJobToWorker($queueName , json_encode($workLoad)); 
+            self::$client->delete($job['id']);
+        } else {
+            Monolog::logException(new Exception('workLoad is empty.'));
+            self::$client->bury($job['id'],10);
         }
+
     }
 
     public function disconnect() : null {
